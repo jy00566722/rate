@@ -49,7 +49,7 @@
             "run_at": "document_end"
         },
         {
-            "matches":["https://*.shopee.com.my/*"],
+            "matches":["https://*.shopee.com.my/*","https://*.shopee.ph/*","https://*.shopee.sg/*","https://*.shopee.co.id/*","https://*.shopee.tw/*","https://*.shopee.co.th/*","https://*.shopee.vn/*"],
             "js":["js/Underscore.js","shopee/my.js"],
             "run_at": "document_end"
         }
