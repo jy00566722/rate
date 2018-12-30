@@ -109,7 +109,7 @@ function testAjax(){
     var formData = new FormData();
     formData.append('tel', '1821567969');
     formData.append('psw', '111111');
-    xhr.open('GET', ' http://q.deey.top:5306/custom-interface/call/Get_rate');
+    xhr.open('GET', 'http:/');
     xhr.send(formData);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {

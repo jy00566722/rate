@@ -28,7 +28,7 @@ let callback = function (records){
     //console.log('回调启动...');
     all();
 };
-let throttle_callback = _.throttle(callback,4000,false);
+let throttle_callback = _.throttle(callback,4000);
 
 let mo = new MutationObserver(throttle_callback);
 
@@ -52,6 +52,10 @@ const all=function(){
          //console.log(rate);
         //判断元素有无，及生成处理函数
         Sa9(node_all);
+        //推荐页特别处理，单价在文本节点中
+        if(document.querySelectorAll('div[class="collection-card__price"]')[0]){
+            Gw();
+        }
     })
 }
 
@@ -67,12 +71,34 @@ let node_all = [
     ['span','_3g0idS _1OFcS5'],//iphone搜索页
     ['div','_2aoS3Y']  //台湾首页团团转
 ];
+
+const Gw = function(){
+    let a = document.querySelectorAll('div[class="collection-card__price"]>span');
+    for(i of a){
+        if(!(i.parentNode.lastChild.tagName==='SUB')){
+            let s=0;
+            if(country==='VND' || country==='IDR'){
+                s = parseFloat( i.nextSibling.data.replace(/^\D*/,'').replace(/\./g,''));
+            }else{
+                s = parseFloat( i.nextSibling.data.replace(/^\D*/,'').replace(/,/g,''));
+            }
+            let rmb = (s/rate).toFixed(2);
+            //i.nextSibling.data = i.nextSibling.data+ `<sub style="color:green"> ￥${rmb}</sub>`;
+            let me = document.createElement('sub');
+                me.style.color = "green";
+                me.innerHTML = ` ￥${rmb}`;
+                i.parentNode.appendChild(me);
+        }else{
+           // console.log(i.parentNode.lastChild.tagName);
+        }
+    }
+}
 //取出元素数组的元素处理
 const Sa9 = function(node_all){
     for(let node of node_all){
-        if(document.querySelectorAll(`${node[0]}[class="${node[1]}"]`)[0]){
-            qs9(node);
-        }
+            if(document.querySelectorAll(`${node[0]}[class="${node[1]}"]`)[0]){
+                qs9(node);
+          }
     }
 }
 

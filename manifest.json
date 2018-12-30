@@ -12,7 +12,8 @@
     "permissions":[
         "storage",
         "tabs",
-        "http://q.deey.top:5306/"
+        "http://q.deey.top:5306/",
+        "http://cp.lizudi.top/"
     ],
     "background":{
         "scripts":["js/axios.min.js","js/background.js"]
