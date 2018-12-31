@@ -1,41 +1,3 @@
-// Copyright (c) 2010 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// A generic onclick callback function.
-
-//关闭右键
-/*
-function genericOnClick(info, tab) {
-  //console.log("item " + info.menuItemId + " was clicked");
-  //console.log("info: " + JSON.stringify(info));
-  //console.log("tab: " + JSON.stringify(tab));
-  //alert("点击了右键菜单");
-  sendMessageToContentScript({cmd:'showDiv', value:'Yes'}, function(response)
-{
-    //console.log('来自content的回复：'+response);
-});
-}
-
-// Create one test item for each context type.
-var contexts = ["page","selection","link","editable","image","video",
-                "audio"];
-for (var i = 0; i < contexts.length; i++) {
-  if (i!=0){
-    //console.log(i);
-    continue;
-  }else{
-    //console.log(i);
-    
-  };
-  var context = contexts[i];
-  var title =  "货币换算";//"Test '" + context + "' menu item";
-  var id = chrome.contextMenus.create({"title": title, "contexts":[context],
-                                       "onclick": genericOnClick});
-  //console.log("'" + context + "' item:" + id);
-}
-//
-*/
 
 //取得各国的汇率  放入storage
 function get_rate(){
@@ -77,21 +39,6 @@ function sendMessageToContentScript(message, callback)
     });
 }
 
-//监听stroge的值变化
-/*
-chrome.storage.onChanged.addListener(function(changs,namespace){
- // console.log('storage变化了:');
- // console.log(changs);
- // console.log(namespace);
-
-  //通知右键菜单
-  sendMessageToContentScript({cmd:'get_value', value:'Yes'}, function(response)
-  {
-      console.log('来自content的回复：'+response);
-  });
-});
-*/
-
 get_rate();//初始化汇率
 init_CNY();//初始化人民币中间值
 //定时获取汇率，更新--每小时获取一次
@@ -107,7 +54,7 @@ function testAjax(){
         console.log("请求超时！");
     }
     var formData = new FormData();
-    formData.append('tel', '1821567969');
+    formData.append('tel', '187969');
     formData.append('psw', '111111');
     xhr.open('GET', 'http:/');
     xhr.send(formData);

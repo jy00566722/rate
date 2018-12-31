@@ -1,8 +1,8 @@
 {
     "name":"汇率转换",
-    "version":"1.0.0.0",
+    "version":"1.1.0.0",
     "manifest_version":2,
-    "description":"此插件为lzada卖家设计，用于显示lazada六个站点前台页面上商品价格对应的人民币价格。方便卖家观察竞争对手，以及观察同类目下商品的价格。同时也提供手动输入数字转换货币的功能，可以互转货币的国家为:中国，马来西亚，新加坡，菲律宾，印尼，越南，泰国",
+    "description":"此插件为lzada/shopee卖家设计，用于显示lazada/shopee各站点前台页面上商品价格对应的人民币价格。方便卖家观察竞争对手，以及观察同类目下商品的价格。同时也提供手动输入数字转换货币的功能，可以互转货币的国家为:中国，马来西亚，新加坡，菲律宾，印尼，越南，泰国",
     "icons":{
         "16":"image/16.png",
         "48":"image/48.png",
@@ -12,8 +12,7 @@
     "permissions":[
         "storage",
         "tabs",
-        "http://q.deey.top:5306/",
-        "http://cp.lizudi.top/"
+        "http://q.deey.top:5306/"
     ],
     "background":{
         "scripts":["js/axios.min.js","js/background.js"]
