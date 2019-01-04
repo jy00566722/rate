@@ -2,7 +2,7 @@
     "name":"汇率转换",
     "version":"1.2.0.0",
     "manifest_version":2,
-    "description":"此插件为lzada/shopee卖家设计，用于显示lazada/shopee各站点前台页面上商品价格对应的人民币价格,方便卖家观察竞争对手的价格。同时也提供手动输入数字转换货币的功能，可以互转货币的国家为:中国，马来西亚，新加坡，菲律宾，印尼，越南，泰国",
+    "description":"此插件为lzada/shopee/Amazon卖家设计，用于显示跨境平台站点前台页面上商品价格对应的人民币价格。同时也提供手动输入数字转换货币的功能，可以互转货币的国家为:中国，马来西亚，新加坡，菲律宾，印尼，越南，泰国",
     "icons":{
         "16":"image/16.png",
         "48":"image/48.png",
@@ -57,7 +57,7 @@
             "matches":["https://*.amazon.com/*"],
             "js":["js/Underscore.js","amazon/amazon.js"],
             "run_at": "document_end"
-        }
+        }      
         
     ],
     "browser_action":{

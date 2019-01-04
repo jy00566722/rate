@@ -43,6 +43,7 @@ const all=function(){
        };
        if(document.querySelectorAll('span[class="a-size-medium a-color-price"]')[0]){
             S5();
+           // S5a();
          };
         if(document.querySelectorAll('span[class="a-size-mini twisterSwatchPrice"]')[0]){
             S6();
@@ -51,24 +52,124 @@ const all=function(){
             S7();
         };
         if(document.querySelectorAll('span[class="a-size-base a-color-base"]')[0]){
-           // S8();   //这个有问题，会引起详情页中的别的元素计算，还没有解决
+            S8();   
         };
         if(document.querySelectorAll('span[class="a-size-medium a-color-base inlineBlock unitLineHeight"]')[0]){
             S9();
+        };
+        if(document.querySelectorAll('span[class="a-size-base a-color-price acs_product-price__buying"]')[0]){
+            S10();
+        };
+        if(document.querySelectorAll('span[class="a-size-small"]')[0]){
+            S11();
+        };
+        if(document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]')[0]){
+            S12();  //很特别的价格                 
         }
-
-
+        if(document.querySelectorAll('span[class="price price--jumbo"]')[0]){
+            S13();  //很特别的价格                 
+        }
     })
 }
 
 
 //具体处理函数
+const S13 = function(){
+    let node_all = document.querySelectorAll('span[class="price price--jumbo"]');
+    for(const a of node_all){
+        if(a.childElementCount==4){
+            let s = parseFloat( a.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ a.children[3].innerHTML);
+            let rmb = (s/rate).toFixed(2);
+            let c = document.createElement('sub');
+            c.style.color = "green";
+            c.innerHTML='￥'+rmb;
+            a.appendChild(c);
+
+        }
+    }
+}
+
+
+const S12 = function(){
+    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]');
+    for(const a of node_all){
+        if(!(a.lastElementChild.tagName=='SUB')){
+        if(a.childElementCount==1){
+            let b = a.children[0];
+            let s = parseFloat( b.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b.children[3].innerHTML);
+            let rmb = (s/rate).toFixed(2);
+            let c = document.createElement('sub');
+            c.style.color = "green";
+            c.innerHTML='￥'+rmb;
+            a.appendChild(c);
+        }else if(a.childElementCount==2){
+            let b = a.children[0];
+            let s = parseFloat( b.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b.children[3].innerHTML);
+            let rmb = (s/rate).toFixed(2);
+
+            let b1 = a.children[1];
+            let s1 = parseFloat( b1.children[2].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b1.children[4].innerHTML);
+            let rmb1 = (s/rate).toFixed(2);
+            let c = document.createElement('sub');
+            c.style.color = "green";
+            c.innerHTML='￥'+rmb+' - ￥'+rmb1;
+            a.appendChild(c);
+            }
+        }
+    }
+}
+
+const S11 = function(){
+    let node_all = document.querySelectorAll('span[class="a-size-small"]');
+    for(const a of node_all){
+        if(!(a.parentElement.lastElementChild.tagName=='SUB')){
+            let s = a.innerHTML.trim();
+            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.appendChild(b);
+            }
+        }
+    }
+}
+
+const S10 = function(){
+    let node_all = document.querySelectorAll('span[class="a-size-base a-color-price acs_product-price__buying"]');
+    let rg1 = /^[^0-9]{0,}/;
+    let rg2 = /\,/g
+    for(const a of node_all){
+        if(!a.innerHTML.includes('￥')){
+            let s2 = a.innerHTML;
+            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
+            let rmb = (s/rate).toFixed(2);
+            a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
+        }
+    }
+}
+
 
 const S9 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-medium a-color-base inlineBlock unitLineHeight"]');
-    //console.log('span[class="a-size-medium"]选择器启动..');
-    //let node_all_length = node_all.length;
-    //console.log(node_all_length);
+    for(const a of node_all){
+        if(!(a.parentElement.lastElementChild.tagName=='SUB')){
+            let s = a.innerHTML.trim();
+            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.appendChild(b);
+            }
+        }
+    }
+}
+
+const S8 = function(){
+    let node_all = document.querySelectorAll('span[class="a-size-base a-color-base"]');
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
@@ -85,25 +186,6 @@ const S9 = function(){
 }
 
 
-
-const S8 = function(){
-    let node_all = document.querySelectorAll('span[class="a-size-base a-color-base"]');
-    let rg1 = /^[^0-9]{0,}/;
-    let rg2 = /\,/g;
-    let rg3 = /[a-z]/mg;
-    for(const a of node_all){
-        let s2 = a.innerHTML;
-        console.log(s2);
-        if(!s2.includes('￥')){
-            if(!(rg3.test(s2))){
-                
-                let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-                let rmb = (s/rate).toFixed(2);
-                a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
-            }
-        }
-    }
-}
 
 
 const S7 = function(){
@@ -156,6 +238,27 @@ const S6 = function(){
         }
     }
 }
+
+const S5a = function(){
+    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price"]');
+    //console.log('span[class="a-size-medium"]选择器启动..');
+    //let node_all_length = node_all.length;
+    //console.log(node_all_length);
+    for(const a of node_all){
+        if(!(a.parentElement.lastElementChild.tagName=='SUB')){
+            let s = a.innerHTML.trim();
+            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.appendChild(b);
+            }
+        }
+    }
+}
+
 
 const S5 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price"]');
