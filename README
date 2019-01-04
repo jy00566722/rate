@@ -1,5 +1,34 @@
 这是一个用于lazada/shopee/amazon等跨境平台前端价格转化为人民币的插件
-目前支持lazada平台
 
-12月30日晚上9点更新：
+【目前支持的平台】:
+	lazada:
+		马来西亚：https://www.lazada.com.my/
+		菲律 宾： https://www.lazada.com.ph/
+		新加 坡： https://www.lazada.sg/
+		印  尼 ：https://www.lazada.co.id/
+		越  南 ：https://www.lazada.vn/
+		泰  国 ：https://www.lazada.co.th/
+
+	Shopee:
+		马来西亚：https://shopee.com.my/
+		菲律宾  ：https://shopee.ph/
+		新加坡  ：https://shopee.sg/
+		印  尼  ：https://shopee.co.id/
+		越  南  ：https://shopee.vn/
+		泰  国  ：https://shopee.co.th/
+		台  湾  ：https://shopee.tw/
+
+	Amazon:
+		美  国 ：https://www.amazon.com/
+
+
+
+
+
+
+
+
+1.2.0.0:   2019年1月4日 增加美国亚马逊站点支持
+
+1.1.0.0:   12月30日晚上9点更新
 	增加shopee平台的支持

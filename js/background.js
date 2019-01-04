@@ -12,6 +12,7 @@ function get_rate(){
       d[`rate_${x.tcur}`] = x.rate;
     })
     d['rate_CNY']='1';  //添加人民币汇率
+    //d['rate_USD']='0.1455'; //暂时临时添加美元固定汇率 后续改为实时获取
     chrome.storage.local.set({"my_rate":d},function(s){
       console.log("从接口获取的汇率数组已经保存在my_rate中,可以使用了.");
     });
