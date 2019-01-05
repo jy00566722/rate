@@ -4,6 +4,9 @@ chrome插件地址为：https://chrome.google.com/webstore/detail/%E6%B1%87%E7%8
 360安全浏览器插件地址为：https://ext.se.360.cn/webstore/detail/bgfcdfgjkfbfbdhfplojpnbiggdkiiih
 注：由于插件审核需要时间，所以在插件市场上的，可能不是最新版本. 特别是360插件市场的审核非常慢。
 
+本插件源代码在：
+https://github.com/jy00566722/rate
+
 【目前支持的平台】:
 	lazada:
 		马来西亚：https://www.lazada.com.my/
@@ -44,8 +47,8 @@ PS:Lazada/Shopee买家也是可以用的，但使用场景感觉不多，海淘�
        插件不会记录用户的任何数据，有google/360审查。
 
 可能存在的问题：
-        由于Lazada/Shopee前端页面，可能会更新，网页结构会变化，造成不能正常显示对应的人民币价格，会定期针对更新。
-        如果在使用中发现哪个页面没有显示人民币价格，欢迎邮件联系反馈，感谢。
+        由于Lazada/Shopee/Amazon前端页面，可能会更新，网页结构会变化，造成不能正常显示对应的人民币价格，会定期针对更新。
+        如果在使用中发现哪个页面没有显示人民币价格，欢迎邮件联系反馈，感谢。ideey88@gmail.com
 
 
 

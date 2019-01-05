@@ -148,7 +148,7 @@ const S11 = function(){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
             //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -182,7 +182,7 @@ const S9 = function(){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
             //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -200,7 +200,7 @@ const S8 = function(){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
             //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -275,7 +275,7 @@ const S5a = function(){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
             //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -293,7 +293,7 @@ const S5 = function(){
     let rg1 = /^[^0-9]{0,}/;
     let rg2 = /\,/g;
     let rg3 = /[a-zA-Z]/mg;
-    let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/m;
+    let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/m;
     for(const a of node_all){
         let s2 = a.innerHTML.trim();
         
@@ -339,10 +339,13 @@ const S2 = function(){
     let rg1 = /\,/g;
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
-        let s1 = parseInt( a.firstChild.data.replace(rg1,''));
-        let s2 = parseFloat('.' + a.nextElementSibling.innerText)
-        let s12 = s1+s2;
-        let rmb = (s12/rate).toFixed(2);
+        //let s1 = parseInt( a.firstChild.data.replace(rg1,''));
+        //let s2 = parseFloat('.' + a.nextElementSibling.innerText)
+        let c = a.innerHTML+'';
+        let s2 = parseFloat( c.replace(rg1,''));
+        //let s12 = s1+s2;
+        //let rmb = (s12/rate).toFixed(2);
+        let rmb = (s2/rate).toFixed(2);
         let b = document.createElement('sub');
             b.style.color = "green";
             b.innerHTML=' '+rmb+'元';
@@ -358,7 +361,7 @@ const S1 = function(){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
             //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
