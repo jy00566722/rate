@@ -38,7 +38,7 @@ for(let i =0;i<rate_u34q.length;i++){
 
 //根据汇率与中间值，给7个input计算值
 let get_value = function(){
-    let s = ["CNY","SGD","PHP","MYR","IDR","VND","THB","TWD"];
+    let s = ["CNY","SGD","PHP","MYR","IDR","VND","THB","TWD","USD","JPY"];
     s.map(x=>{
         document.getElementById(`Rate_${x}`).value=(rate_CNY*rate_arr[`rate_${x}`]).toFixed(2);
     });

@@ -57,7 +57,12 @@
             "matches":["https://*.amazon.com/*"],
             "js":["js/Underscore.js","amazon/amazon.js"],
             "run_at": "document_end"
-        }      
+        },
+        {
+            "matches":["https://*.amazon.co.jp/*"],
+            "js":["js/Underscore.js","amazon/amazonjp.js"],
+            "run_at": "document_end"
+        }        
         
     ],
     "browser_action":{

@@ -21,11 +21,11 @@ try{
 }
 
 let rate = 0;
-let country = 'USD';
+let country = 'JPY';
 
 //总回调
 const all=function(){
-    console.log('总回调启动');
+    //console.log('总回调启动');
     chrome.storage.local.get(["my_rate"],function(result){
          rate = result.my_rate[`rate_${country}`];
        // Sa9(node_all);
@@ -43,7 +43,6 @@ const all=function(){
        };
        if(document.querySelectorAll('span[class="a-size-medium a-color-price"]')[0]){
             S5();
-           // S5a();
          };
         if(document.querySelectorAll('span[class="a-size-mini twisterSwatchPrice"]')[0]){
             S6();
@@ -69,29 +68,36 @@ const all=function(){
         if(document.querySelectorAll('span[class="price price--jumbo"]')[0]){
             S13();  //很特别的价格                 
         };
+        if(document.querySelectorAll('span[class="a-size-base a-color-price s-price a-text-bold"]')[0]){
+            S14(document.querySelectorAll('span[class="a-size-base a-color-price s-price a-text-bold"]'));
+        };
+        if(document.querySelectorAll('span[class="a-size-base a-color-price a-text-bold"]')[0]){
+            S14(document.querySelectorAll('span[class="a-size-base a-color-price a-text-bold"]'));
+        };
         if(document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]')[0]){
-            S14();
+            S14(document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]'));
         }
+
+
     })
 }
 
 
 //具体处理函数
-const S14 = function(){
-    let node_all = document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]');
+
+const S14 = function(node_all){
+    //let node_all = document.querySelectorAll('span[class="a-size-base a-color-price s-price a-text-bold"]');
     let rg1 = /^[^0-9]{0,}/;
     let rg2 = /\,/g
     for(const a of node_all){
-        if(!a.innerHTML.includes('￥')){
+        if(!a.innerHTML.includes('元')){
             let s2 = a.innerHTML.trim();
             let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
             let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+            a.innerHTML = s2+`<sub style="color:green"> ${rmb}元</sub>`;
         }
     }
 }
-
-
 const S13 = function(){
     let node_all = document.querySelectorAll('span[class="price price--jumbo"]');
     for(const a of node_all){
@@ -100,9 +106,8 @@ const S13 = function(){
             let rmb = (s/rate).toFixed(2);
             let c = document.createElement('sub');
             c.style.color = "green";
-            c.innerHTML='￥'+rmb;
+            c.innerHTML=' '+ rmb+'元';
             a.appendChild(c);
-
         }
     }
 }
@@ -118,7 +123,7 @@ const S12 = function(){
             let rmb = (s/rate).toFixed(2);
             let c = document.createElement('sub');
             c.style.color = "green";
-            c.innerHTML='￥'+rmb;
+            c.innerHTML=' '+rmb+'元';
             a.appendChild(c);
         }else if(a.childElementCount==2){
             let b = a.children[0];
@@ -130,7 +135,7 @@ const S12 = function(){
             let rmb1 = (s1/rate).toFixed(2);
             let c = document.createElement('sub');
             c.style.color = "green";
-            c.innerHTML='￥'+rmb+' - ￥'+rmb1;
+            c.innerHTML=' '+rmb+' - '+rmb1+'元';
             a.appendChild(c);
             }
         }
@@ -142,7 +147,8 @@ const S11 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -159,22 +165,24 @@ const S10 = function(){
     let rg1 = /^[^0-9]{0,}/;
     let rg2 = /\,/g
     for(const a of node_all){
-        if(!a.innerHTML.includes('￥')){
+        if(!a.innerHTML.includes('元')){
             let s2 = a.innerHTML;
             let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
             let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
+            a.innerHTML = s2+`<sub style="color:green"> ${rmb}元</sub>`;
         }
     }
 }
 
 
 const S9 = function(){
-    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-base inlineBlock unitLineHeight"]');
+    //console.log('s9启动');
+    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-base inlineBlock unitLineHeight"]'); //a-size-medium a-color-base inlineBlock unitLineHeight
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -191,7 +199,8 @@ const S8 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -220,7 +229,7 @@ const S7 = function(){
                 let ss = parseFloat( s3.replace(rg1,'')) + parseFloat('.'+ 4);
                 let s_ = (s/rate).toFixed(2);
                 let _s = (ss/rate).toFixed(2);
-                let rmb = `￥${s_} - ￥${_s}`;
+                let rmb = `${s_} - ${_s}元`;
                 let b = document.createElement('sub');
                     b.style.color = "green";
                     b.innerHTML=rmb;
@@ -230,7 +239,7 @@ const S7 = function(){
                 let s2 = a.children[2].innerText;
                 let s = parseFloat( s1.replace(rg1,'')) + parseFloat('.'+ s2);
                 let s_ = (s/rate).toFixed(2);
-                let rmb = `￥${s_}`;
+                let rmb = `${s_}元`;
                 let b = document.createElement('sub');
                     b.style.color = "green";
                     b.innerHTML=rmb;
@@ -248,11 +257,11 @@ const S6 = function(){
     let rg3 = /[a-zA-Z]/mg;
     for(const a of node_all){
         let s2 = a.innerHTML;
-        if(!s2.includes('￥')  && !(rg3.test(s2)) ){
+        if(!s2.includes('元')  && !(rg3.test(s2)) ){
             
             let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
             let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
+            a.innerHTML = s2+`<sub style="color:green">${rmb}元</sub>`;
         }
     }
 }
@@ -265,7 +274,8 @@ const S5a = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -283,13 +293,16 @@ const S5 = function(){
     let rg1 = /^[^0-9]{0,}/;
     let rg2 = /\,/g;
     let rg3 = /[a-zA-Z]/mg;
+    let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/m;
     for(const a of node_all){
-        let s2 = a.innerHTML;
-        if(!s2.includes('￥')  && !(rg3.test(s2)) ){
+        let s2 = a.innerHTML.trim();
+        
+        if(!Rg.test(s2)){continue;};
+        if(!s2.includes('元')  && !(rg3.test(s2)) ){
             
             let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
             let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
+            a.innerHTML = s2+`<sub style="color:green"> ${rmb}元</sub>`;
         }
     }
 }
@@ -299,11 +312,11 @@ const S4 = function(){
     let rg1 = /^[^0-9]{0,}/;
     let rg2 = /\,/g
     for(const a of node_all){
-        if(!a.innerHTML.includes('￥')){
+        if(!a.innerHTML.includes('元') && !a.innerHTML.includes('pt')){
             let s2 = a.innerHTML;
             let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
             let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
+            a.innerHTML = s2+`<sub style="color:green"> ${rmb}元</sub>`;
         }
     }
 }
@@ -312,11 +325,11 @@ const S3 = function(){
     let rg1 = /^[^0-9]{0,}/;
     let rg2 = /\,/g
     for(const a of node_all){
-        if(!a.innerHTML.includes('￥')){
+        if(!a.innerHTML.includes('元')){
             let s2 = a.innerHTML;
             let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
             let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
+            a.innerHTML = s2+`<sub style="color:green"> ${rmb}元</sub>`;
         }
     }
 }
@@ -332,7 +345,7 @@ const S2 = function(){
         let rmb = (s12/rate).toFixed(2);
         let b = document.createElement('sub');
             b.style.color = "green";
-            b.innerHTML='￥'+rmb;
+            b.innerHTML=' '+rmb+'元';
             a.parentElement.appendChild(b);
 
         }
@@ -341,13 +354,11 @@ const S2 = function(){
 
 const S1 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-medium"]');
-    //console.log('span[class="a-size-medium"]选择器启动..');
-    //let node_all_length = node_all.length;
-    //console.log(node_all_length);
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            //let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^[JPY|￥] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|￥] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -368,12 +379,12 @@ const getRmb = function(s){
         let s22 =  s2.trim().replace(rg1,'').replace(rg2,'');
         let s111 = (s11/rate).toFixed(2);
         let s222 = (s22/rate).toFixed(2);
-        return `￥${s111} - ￥${s222}`;
+        return `${s111} - ${s222}元`;
     }else{
         let rg1 = /[^0-9]{0,}/;
         let rg2 = /\,/g;
         let s1 = s.trim().replace(rg1,'').replace(rg2,'');
         let s11 = (s1/rate).toFixed(2);
-        return `￥${s11}`;
+        return ` ${s11}元`;
     }
 }
