@@ -1,9 +1,9 @@
 # rate
 
-> 这是一个跨境平台前端价格转化为人民币的插件,目前支持的平台有：
-lazada
-shopee
-amazon
+> 这是一个跨境平台前端价格转化为人民币的插件,目前支持的平台有：    
+lazada    
+shopee    
+amazon    
 ……
 
 
@@ -15,19 +15,19 @@ amazon
 
 注：由于插件审核需要时间，所以在插件市场上的，可能不是最新版本. 特别是360插件市场的审核非常慢。
 
-本插件源代码在：
+##### 源代码：
 [Github](https://github.com/jy00566722/rate)
 
 ####【目前支持的平台】:
 
 lazada:
 
--马来西亚：https://www.lazada.com.my/
--菲 律 宾：https://www.lazada.com.ph/
--新 加 坡：https://www.lazada.sg/
--印    尼：https://www.lazada.co.id/
--越    南：https://www.lazada.vn/
--泰    国：https://www.lazada.co.th/
+- 马来西亚：https://www.lazada.com.my/
+- 菲 律 宾：https://www.lazada.com.ph/
+- 新 加 坡：https://www.lazada.sg/
+- 印    尼：https://www.lazada.co.id/
+- 越    南：https://www.lazada.vn/
+- 泰    国：https://www.lazada.co.th/
 
 Shopee:
 - 马来西亚：https://shopee.com.my/
