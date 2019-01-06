@@ -1,23 +1,27 @@
-#rate
+# rate
 
->这是一个跨境平台前端价格转化为人民币的插件,目前支持的平台有：
+> 这是一个跨境平台前端价格转化为人民币的插件,目前支持的平台有：
 lazada
 shopee
 amazon
 ……
 
 
-####下载
-#####[chrome扩展](https://chrome.google.com/webstore/detail/%E6%B1%87%E7%8E%87%E8%BD%AC%E6%8D%A2/bcpgdpedphodjcjlminjbdeejccjbimp?hl=zh-CN)
+#### 下载
 
-#####[360安全浏览器](https://ext.se.360.cn/webstore/detail/bgfcdfgjkfbfbdhfplojpnbiggdkiiih)
+##### [chrome扩展](https://chrome.google.com/webstore/detail/%E6%B1%87%E7%8E%87%E8%BD%AC%E6%8D%A2/bcpgdpedphodjcjlminjbdeejccjbimp?hl=zh-CN)
+
+##### [360安全浏览器](https://ext.se.360.cn/webstore/detail/bgfcdfgjkfbfbdhfplojpnbiggdkiiih)
+
 注：由于插件审核需要时间，所以在插件市场上的，可能不是最新版本. 特别是360插件市场的审核非常慢。
 
 本插件源代码在：
 [Github](https://github.com/jy00566722/rate)
 
 ####【目前支持的平台】:
+
 lazada:
+
 -马来西亚：https://www.lazada.com.my/
 -菲 律 宾：https://www.lazada.com.ph/
 -新 加 坡：https://www.lazada.sg/
