@@ -18,7 +18,7 @@ amazon
 ##### 源代码：
 [Github](https://github.com/jy00566722/rate)
 
-####【目前支持的平台】:
+#### 目前支持的平台:
 
 lazada:
 
