@@ -69,4 +69,20 @@ function testAjax(){
     }
 }
 
+//监控各站点元素调用情况，去除不必要的元素监控
+let as = {
+    uk : {s1:0,s2:0,s3:0,s4:0,s5:0,s6:0,s7:0,s8:0,s9:0,s10:0,s11:0,s12:0,s13:0,s14:0,s15:0,s16:0,s17:0,s18:0},
+    jp : {s1:0,s2:0,s3:0,s4:0,s5:0,s6:0,s7:0,s8:0,s9:0,s10:0,s11:0,s12:0,s13:0,s14:0,s15:0,s16:0,s17:0,s18:0},
+    de : {s1:0,s2:0,s3:0,s4:0,s5:0,s6:0,s7:0,s8:0,s9:0,s10:0,s11:0,s12:0,s13:0,s14:0,s15:0,s16:0,s17:0,s18:0}
+}
+//监听
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){   
+    if(request.op ==='add'){
+        as[request.cu][request.s] +=1;
+    }
+});
+
+
+
+
 
