@@ -42,6 +42,7 @@ Amazon:
 - 美  国 ：https://www.amazon.com/
 - 日  本 : https://www.amazon.co.jp/ 
 - 英  国 ：https://www.amazon.co.uk/
+- 德  国 ：https://www.amazon.de/
 
 
 ### 介绍：
@@ -70,6 +71,8 @@ PS:Lazada/Shopee买家也是可以用的，但使用场景感觉不多，海淘�
 
 
 ### 更新记录
+- 1.2.3.0    2019年1月9日 增加德国亚马逊站点支持
+
 - 1.2.2.0    2019年1月8日 增加英国亚马逊站点支持
 
 - 1.2.1.0    2019年1月5日 增加日本亚马逊站点支持

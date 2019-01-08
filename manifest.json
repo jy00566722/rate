@@ -67,6 +67,11 @@
             "matches":["https://*.amazon.co.uk/*"],
             "js":["js/Underscore.js","amazon/amazonuk.js"],
             "run_at": "document_end"
+        },
+        {
+            "matches":["https://*.amazon.de/*"],
+            "js":["js/Underscore.js","amazon/amazonde.js"],
+            "run_at": "document_end"
         }
 
         

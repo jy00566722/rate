@@ -21,14 +21,18 @@ try{
 }
 
 let rate = 0;
-let country = 'GBP';
+let country = 'EUR';
 
 //监控元函数调用
-// const function_time = function(function_){
-//     chrome.runtime.sendMessage({op:"add",cu:"uk",s:function_}, function(response) {
-//        // console.log('收到来自后台的回复：' + response);
-//     });
-// }
+const function_time = function(function_){
+    chrome.runtime.sendMessage({op:"add",cu:"uk",s:function_}, function(response) {
+       // console.log('收到来自后台的回复：' + response);
+    });
+}
+//三种价格表现形式
+let rg1 = /^EUR (\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- EUR(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+let rg2 = /^EUR (\d{1,3}\.){0,}\d{1,3}\,\d{2}( \- EUR(\d{1,3}\.){0,}\d{1,3}\,\d{2}){0,1}/;
+let rg3 = /^(\d{1,3}\.){0,}\d{1,3}\,\d{2} [^0-9a-zA-Z]( \- (\d{1,3}\.){0,}\d{1,3}\,\d{2} [^0-9a-zA-Z]){0,1}/;
 
 //总回调
 const all=function(){
@@ -109,8 +113,8 @@ const all=function(){
             S1(document.querySelectorAll('span[class="olpShippingPrice"]'));
             //function_time('s18');
         }
-        if(document.querySelectorAll('span[class="price-display"]')[0]){   //S18
-            S1(document.querySelectorAll('span[class="price-display"]'));
+        if(document.querySelectorAll('span[class="a-size-medium a-color-secondary inlineBlock unitLineHeight"]')[0]){   //S18
+            S1(document.querySelectorAll('span[class="a-size-medium a-color-secondary inlineBlock unitLineHeight"]'));
             //function_time('s18');
         }
     })
@@ -120,14 +124,12 @@ const all=function(){
 //具体处理函数
 const S14 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]');
-    let rg1 = /^[^0-9]{0,}/;
-    let rg2 = /\,/g
     for(const a of node_all){
         if(!a.innerHTML.includes('￥')){
             let s2 = a.innerHTML.trim();
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+            //let s = parseFloat( s2.replace(rg1,'').replace(rg3,'').replace(rg2,'.'));
+            let rmb = getRmb2(s2);
+            a.innerHTML = s2+`<sub style="color:green">${rmb}</sub>`;
         }
     }
 }
@@ -183,28 +185,26 @@ const S11 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\D(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \D(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            if(Rg.test(s)){
-            let rmb = getRmb(s);
+            //let Rg = /^EUR (\d{1,3}\.){0,}\d{1,3}\,\d{2}( \- EUR(\d{1,3}\.){0,}\d{1,3}\,\d{2}){0,1}/;
+ 
+            let rmb = getRmb2(s);
             let b = document.createElement('sub');
                 b.style.color = "green";
                 b.innerHTML=rmb;
                 a.parentElement.appendChild(b);
-            }
+
         }
     }
 }
 
 const S10 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-base a-color-price acs_product-price__buying"]');
-    let rg1 = /^[^0-9]{0,}/;
-    let rg2 = /\,/g
     for(const a of node_all){
         if(!a.innerHTML.includes('￥')){
             let s2 = a.innerHTML;
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+            //let s = parseFloat( s2.replace(rg1,'').replace(rg3,'').replace(rg2,'.'));
+            let rmb =getRmb2(s2);
+            a.innerHTML = s2+`<sub style="color:green">${rmb}</sub>`;
         }
     }
 }
@@ -216,14 +216,14 @@ const S9 = function(){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
                 s= s.replace(/\(.{1,}?\)/,'').trim();
-            let Rg = /^\D(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \D(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            if(Rg.test(s)){
-            let rmb = getRmb(s);
+            //let Rg = /^(\d{1,3}\.){0,}\d{1,3}\,\d{2} \D( \- (\d{1,3}\.){0,}\d{1,3}\,\d{2} \D){0,1}/;
+
+            let rmb = getRmb2(s);
             let b = document.createElement('sub');
                 b.style.color = "green";
                 b.innerHTML=rmb;
                 a.parentElement.appendChild(b);
-            }
+
         }
     }
 }
@@ -233,14 +233,14 @@ const S8 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\D(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \D(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            if(Rg.test(s)){
-            let rmb = getRmb(s);
+            //let Rg = /^EUR (\d{1,3}\.){0,}\d{1,3}\,\d{2}( \- EUR(\d{1,3}\.){0,}\d{1,3}\,\d{2}){0,1}/;
+
+            let rmb = getRmb2(s);
             let b = document.createElement('sub');
                 b.style.color = "green";
                 b.innerHTML=rmb;
                 a.parentElement.appendChild(b);
-            }
+
         }
     }
 }
@@ -285,80 +285,49 @@ const S7 = function(){
 
 const S6 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-mini twisterSwatchPrice"]');
-    let rg1 = /^[^0-9]{0,}/;
-    let rg2 = /\,/g;
-    let rg3 = /[a-zA-Z]/mg;
     for(const a of node_all){
         let s2 = a.innerHTML;
-        if(!s2.includes('￥')  && !(rg3.test(s2)) ){
-            
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+        if(!s2.includes('￥') ){
+            //let s = parseFloat( s2.replace(rg1,'').replace(rg4,'').replace(rg2,'.'));
+            let rmb =getRmb2(s2);
+            a.innerHTML = s2+`<sub style="color:green">${rmb}</sub>`;
         }
     }
 }
-
-const S5a = function(){
-    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price"]');
-    //console.log('span[class="a-size-medium"]选择器启动..');
-    //let node_all_length = node_all.length;
-    //console.log(node_all_length);
-    for(const a of node_all){
-        if(!(a.parentElement.lastElementChild.tagName=='SUB')){
-            let s = a.innerHTML.trim();
-            let Rg = /^\D(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \D(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            if(Rg.test(s)){
-            let rmb = getRmb(s);
-            let b = document.createElement('sub');
-                b.style.color = "green";
-                b.innerHTML=rmb;
-                a.parentElement.appendChild(b);
-            }
-        }
-    }
-}
-
 
 const S5 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price"]');
-    let rg1 = /^[^0-9]{0,}/;
-    let rg2 = /\,/g;
-    let rg3 = /[a-zA-Z]/mg;
     for(const a of node_all){
         let s2 = a.innerHTML;
-        if(!s2.includes('￥')  && !(rg3.test(s2)) ){
+       // if(!s2.includes('￥')  && !(rg3.test(s2)) ){
+        if(!s2.includes('￥')  ){
             
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+            //let s = parseFloat( s2.replace(rg1,'').replace(rg4,'').replace(rg2,'.'));
+            let rmb = getRmb2(s2);
+            a.innerHTML = s2+`<sub style="color:green">${rmb}</sub>`;
         }
     }
 }
 
 const S4 = function(){
     let node_all = document.querySelectorAll('span[class="a-color-price"]');
-    let rg1 = /^[^0-9]{0,}/;
-    let rg2 = /\,/g
     for(const a of node_all){
         if(!a.innerHTML.includes('￥')){
             let s2 = a.innerHTML;
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+            //let s = parseFloat( s2.replace(rg1,'').replace(rg3,'').replace(rg2,'.'));
+            let rmb = getRmb2(s2);
+            a.innerHTML = s2+`<sub style="color:green">${rmb}</sub>`;
         }
     }
 }
 const S3 = function(){
     let node_all = document.querySelectorAll('span[class="p13n-sc-price"]');
-    let rg1 = /^[^0-9]{0,}/;
-    let rg2 = /\,/g
     for(const a of node_all){
         if(!a.innerHTML.includes('￥')){
             let s2 = a.innerHTML;
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+
+            let rmb = getRmb2(s2);
+            a.innerHTML = s2+`<sub style="color:green">${rmb}</sub>`;
         }
     }
 }
@@ -387,9 +356,9 @@ const S1 = function(node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
             // let Rg = /^\D(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \D(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            let Rg = /^\D(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \D(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
-            if(Rg.test(s)){
-            let rmb = getRmb(s);
+            //let Rg = /^EUR (\d{1,3}\.){0,}\d{1,3}\,\d{2}( \- EUR(\d{1,3}\.){0,}\d{1,3}\,\d{2}){0,1}/;
+            if(rg1.test(s) || rg2.test(s) || rg3.test(s)){
+            let rmb = getRmb2(s);
             let b = document.createElement('sub');
                 b.style.color = "green";
                 b.innerHTML=rmb;
@@ -403,17 +372,71 @@ const getRmb = function(s){
     if(s.includes('-')){
         let [s1,s2] = s.split('-'); 
         let rg1 = /^[^0-9]{0,}/;
+        let rg3 = /\./g;
         let rg2 = /\,/g;
-        let s11 =  s1.trim().replace(rg1,'').replace(rg2,'');
-        let s22 =  s2.trim().replace(rg1,'').replace(rg2,'');
+        let s11 = parseFloat( s1.trim().replace(rg1,'').replace(rg3,'').replace(rg2,'.'));
+        let s22 = parseFloat( s2.trim().replace(rg1,'').replace(rg3,'').replace(rg2,'.'));
         let s111 = (s11/rate).toFixed(2);
         let s222 = (s22/rate).toFixed(2);
         return ` ￥${s111} - ￥${s222}`;
     }else{
-        let rg1 = /[^0-9]{0,}/;
+        let rg1 = /^[^0-9]{0,}/;
+        let rg3 = /\./g;
         let rg2 = /\,/g;
-        let s1 = s.trim().replace(rg1,'').replace(rg2,'');
+        let s1 = parseFloat( s.trim().replace(rg1,'').replace(rg3,'').replace(rg2,'.'));
         let s11 = (s1/rate).toFixed(2);
         return ` ￥${s11}`;
+    }
+}
+//EUR 38.00 - EUR 68.74      EUR 38,00 - EUR 68,74    10,39 € - 20,79 €
+// let rg1 = /^EUR (\d{1,3}\,){0,}\d{1,3}\.\d{2}}( \- EUR(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+// let rg2 = /^EUR (\d{1,3}\.){0,}\d{1,3}\,\d{2}( \- EUR(\d{1,3}\.){0,}\d{1,3}\,\d{2}){0,1}/;
+// let rg3 = /^(\d{1,3}\.){0,}\d{1,3}\,\d{2} \D( \- (\d{1,3}\.){0,}\d{1,3}\,\d{2} \D){0,1}/;
+const getRmb2 = function(s){
+    s = s.replace(/\(.{1,}?\)/gm,'').replace('&nbsp;',' ').trim();
+    if(rg1.test(s)){
+        if(s.includes('-')){
+            let [s1,s2] = s.split('-');
+            s1 = parseFloat( s1.trim().replace('EUR ','').replace(',',''));
+            s2 = parseFloat( s2.trim().replace('EUR ','').replace(',',''));
+            s1_ = (s1/rate).toFixed(2);
+            s2_ = (s2/rate).toFixed(2);
+            return ` ￥${s1_} - ￥${s2_}`;
+        }else{
+            s = parseFloat( s.replace('EUR ','').replace(',',''));
+            s_ = (s/rate).toFixed(2);
+            return ` ￥${s_}`;
+        }
+
+    }else if(rg2.test(s)){
+        if(s.includes('-')){
+            let [s1,s2] = s.split('-');
+            s1 = parseFloat( s1.trim().replace('EUR ','').replace('.','').replace(',','.'));
+            s2 = parseFloat( s2.trim().replace('EUR ','').replace('.','').replace(',','.'));
+            s1_ = (s1/rate).toFixed(2);
+            s2_ = (s2/rate).toFixed(2);
+            return ` ￥${s1_} - ￥${s2_}`;
+        }else{
+            s = parseFloat( s.replace('EUR ','').replace('.','').replace(',','.'));
+            s_ = (s/rate).toFixed(2);
+            return ` ￥${s_}`;
+        }
+    }else if(rg3.test(s)){     //10,39 € - 20,79 €
+        if(s.includes('-')){
+            let [s1,s2] = s.split('-');
+            s1 = parseFloat( s1.trim().replace(/\D{1,}$/,'').replace('.','').replace(',','.'));
+            s2 = parseFloat( s2.trim().replace(/\D{1,}$/,'').replace('.','').replace(',','.'));
+            s1_ = (s1/rate).toFixed(2);
+            s2_ = (s2/rate).toFixed(2);
+            return ` ￥${s1_} - ￥${s2_}`;
+        }else{
+            s = parseFloat( s.replace(/\D{1,}$/,'').replace('','').replace(',','.'));
+            s_ = (s/rate).toFixed(2);
+            return ` ￥${s_}`;
+        }
+    }else{
+       // console.log('计算出空单价.');
+        //console.log(s);
+        return '';
     }
 }
