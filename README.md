@@ -14,6 +14,8 @@ amazon
 ##### [360安全浏览器](https://ext.se.360.cn/webstore/detail/bgfcdfgjkfbfbdhfplojpnbiggdkiiih)
 
 注：由于插件审核需要时间，所以在插件市场上的，可能不是最新版本. 特别是360插件市场的审核非常慢。
+##### 如果360市场不是最新的1.2.3.0版本，可以使用这个离线[crx文件](http://g.deey.top/rate-360-1.2.3.0.crx)安装. 注意这个crx文件只适用于360安全浏览器，不适用于chrome浏览器。
+##### 原因是：1、这个crx是360安全浏览器打包的。2、最新版本的chrome已经禁止离线安装crx插件，都是要在线安装的。
 
 ### 源代码：
 [Github](https://github.com/jy00566722/rate)
