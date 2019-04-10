@@ -113,6 +113,15 @@ const all=function(){
             S1(document.querySelectorAll('span[class="price-display"]'));
             //function_time('s18');
         }
+        //详情页变动处理20190410
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]')[0]){   //S18
+            S1(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]'));
+            //function_time('s18');
+        }
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]')[0]){   //S18
+            S1(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]'));
+            //function_time('s18');
+        }
     })
 }
 
