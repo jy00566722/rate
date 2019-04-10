@@ -76,6 +76,14 @@ const all=function(){
         };
         if(document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]')[0]){
             S14(document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]'));
+        };
+        //详情页主价格 calss="a-size-medium a-color-price priceBlockBuyingPriceString"   2019-04-40更新
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]')[0]){
+            S15();                                
+        }
+        //详情页主价格，另一种形式
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]')[0]){
+            S16();                                
         }
 
 
@@ -84,6 +92,40 @@ const all=function(){
 
 
 //具体处理函数
+
+const S16=function(){
+    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]');
+    for(const a of node_all){
+        if(!(a.nextElementSibling.tagName==='SUB')){
+            let s = a.innerHTML.trim();
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.insertBefore(b,a.nextElementSibling);
+            }
+        }
+    }
+}
+
+const S15=function(){
+    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]');
+    for(const a of node_all){
+        if(!(a.nextElementSibling.tagName==='SUB')){
+            let s = a.innerHTML.trim();
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.insertBefore(b,a.nextElementSibling);
+            }
+        }
+    }
+}
 
 const S14 = function(node_all){
     //let node_all = document.querySelectorAll('span[class="a-size-base a-color-price s-price a-text-bold"]');
