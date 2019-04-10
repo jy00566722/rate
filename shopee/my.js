@@ -68,6 +68,9 @@ let node_all = [
     ['div','shopee-item-card__current-price shopee-item-card__current-price--free-shipping'],//详情页下面的价
     ['div','shopee-item-card__current-price'],//详情页下面的价
     ['div','_3r_Ddr'],
+    ['span','_341bF0'],
+    ['span','SlvYAy'],
+    ['div','item-card-special__current-price item-card-special__current-price--special item-card-special__current-price--ofs'],
     ['span','_3g0idS _1OFcS5'],//iphone搜索页
     ['div','_2aoS3Y']  //台湾首页团团转
 ];

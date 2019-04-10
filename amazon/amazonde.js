@@ -117,6 +117,24 @@ const all=function(){
             S1(document.querySelectorAll('span[class="a-size-medium a-color-secondary inlineBlock unitLineHeight"]'));
             //function_time('s18');
         }
+        //详情页变动后增加的两条--主价格
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]')[0]){   //S18
+            S1(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]'));
+            //function_time('s18');
+        }
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]')[0]){   //S18
+            S1(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]'));
+            //function_time('s18');
+        }
+
+        if(document.querySelectorAll('span[class="a-color-base"]')[0]){   //S18
+            S1(document.querySelectorAll('span[class="a-color-base"]'));
+            //function_time('s18');
+        }
+
+
+
+
     })
 }
 
@@ -337,10 +355,8 @@ const S2 = function(){
     let rg1 = /\,/g;
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
-        let s1 = parseInt( a.firstChild.data.replace(rg1,''));
-        let s2 = parseFloat('.' + a.nextElementSibling.innerText)
-        let s12 = s1+s2;
-        let rmb = (s12/rate).toFixed(2);
+        let s1 = parseFloat( a.innerText.replace(rg1,'.'));
+        let rmb = (s1/rate).toFixed(2);
         let b = document.createElement('sub');
             b.style.color = "green";
             b.innerHTML=' ￥'+rmb;

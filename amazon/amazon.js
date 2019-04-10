@@ -38,12 +38,12 @@ const all=function(){
        if(document.querySelectorAll('span[class="p13n-sc-price"]')[0]){
              S3();
         };
-        if(document.querySelectorAll('span[class="a-color-price"]')[0]){
+        if(document.querySelectorAll('span[class="a-color-price"]')[0]){    
             S4();
        };
        if(document.querySelectorAll('span[class="a-size-medium a-color-price"]')[0]){
             S5();
-           // S5a();
+           // S5a();     //a-size-base a-color-secondary   //a-size-medium a-color-price offer-price a-text-normal
          };
         if(document.querySelectorAll('span[class="a-size-mini twisterSwatchPrice"]')[0]){
             S6();
@@ -72,11 +72,54 @@ const all=function(){
         if(document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]')[0]){
             S14();
         }
+        //详情页主价格 calss="a-size-medium a-color-price priceBlockBuyingPriceString"   2019-04-40更新
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]')[0]){
+            S15();                                
+        }
+        //详情页主价格，另一种形式
+        if(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]')[0]){
+            S16();                                
+        }
     })
 }
 
 
 //具体处理函数
+
+const S16=function(){
+    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]');
+    for(const a of node_all){
+        if(!(a.nextElementSibling.tagName==='SUB')){
+            let s = a.innerHTML.trim();
+            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.insertBefore(b,a.nextElementSibling);
+            }
+        }
+    }
+}
+
+const S15=function(){
+    let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]');
+    for(const a of node_all){
+        if(!(a.nextElementSibling.tagName==='SUB')){
+            let s = a.innerHTML.trim();
+            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.insertBefore(b,a.nextElementSibling);
+            }
+        }
+    }
+}
+
 const S14 = function(){
     let node_all = document.querySelectorAll('span[class="a-size-large a-color-price olpOfferPrice a-text-bold"]');
     let rg1 = /^[^0-9]{0,}/;
