@@ -18,13 +18,14 @@ let node_all=[
     ['span','s-price'], 
     ['b','notranslate'],
     ['span','notranslate'],
-    ['span','s-save-price']
+    ['span','current-price'],
+    ['div','detail-price']
 ];
 //====统一监听body的改变，触发总回调
 let callback = function (records){
     all();
 };
-let throttle_callback = _.throttle(callback,3500);
+let throttle_callback = _.throttle(callback,3000);
 let mo = new MutationObserver(throttle_callback);
 let option = {
   'childList': true,
@@ -45,12 +46,36 @@ function all(){
         //console.log(rate);
         //判断元素有无，及生成处理函数
         find_node(node_all);
+        //特别处理详情页二段式价格
+        P2();
         //推荐页特别处理，单价在文本节点中
         if(document.querySelectorAll('div[class="collection-card__price"]')[0]){
             Gw();
         }
     })
 }
+
+//详情页主价二段式，特别处理
+function P2(){
+    let low = document.querySelectorAll('span[itemprop="lowPrice"]')[0];
+    let high = document.querySelectorAll('span[itemprop="highPrice"]')[0];
+    if(low){
+        if(!low.innerHTML.includes('￥')){
+            console.log(low.innerHTML);
+        let rmb =priceRmb(low.innerHTML);
+        low.innerHTML = low.innerHTML+`<sub style="color:green"> ￥${rmb}</sub>`;
+        }
+    }
+    if(high){
+        if(!high.innerHTML.includes('￥')){
+            console.log(high.innerHTML);
+        let rmb =priceRmb(high.innerHTML);
+        high.innerHTML = high.innerHTML+`<sub style="color:green"> ￥${rmb}</sub>`;
+        }
+    }
+
+}
+
 //let rg1 =/^(US \$){0,1}\d{1,}\.\d{2}$/;
 let rg2 =/^(US \$){0,1}\d{1,}\.\d{2}( \- \d{1,}\.\d{2}){0,1}/;
 //let rg3 =/^(US \$){0,1}\d{1,}\.\d{2}( \(about \d{1,}%\)){0,1}( \- \d{1,}\.\d{2}){0,1}/;
@@ -82,9 +107,6 @@ const qs9=function(node,classname){
 }
 
 const priceRmb = function(s){
-    if(s.includes('about')){
-        s=s.replace(/\(.+?\)/,'');
-    }
     if(s.includes('-')){
         let ar=s.split('-');
         let p1 =((parseFloat(ar[0].trim().replace('US $','')))/rate).toFixed(2);
@@ -96,5 +118,4 @@ const priceRmb = function(s){
     let price = (p/rate).toFixed(2);
     return price;
     }
-
 }

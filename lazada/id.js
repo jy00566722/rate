@@ -5,7 +5,7 @@ let callback = function (records){
     //console.log('回调启动...');
     all();
 };
-let throttle_callback = _.throttle(callback,4000,false);
+let throttle_callback = _.throttle(callback,3500,false);
 
 let mo = new MutationObserver(throttle_callback);
 
