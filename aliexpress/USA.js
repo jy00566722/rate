@@ -53,7 +53,7 @@ function all(){
 }
 //let rg1 =/^(US \$){0,1}\d{1,}\.\d{2}$/;
 let rg2 =/^(US \$){0,1}\d{1,}\.\d{2}( \- \d{1,}\.\d{2}){0,1}/;
-let rg3 =/^(US \$){0,1}\d{1,}\.\d{2}( \(about \d{1,}%\)){0,1}( \- \d{1,}\.\d{2}){0,1}/;
+//let rg3 =/^(US \$){0,1}\d{1,}\.\d{2}( \(about \d{1,}%\)){0,1}( \- \d{1,}\.\d{2}){0,1}/;
 //找出元素
 function find_node(node_all){
         for(let node of node_all){
@@ -70,7 +70,7 @@ const qs9=function(node,classname){
     let a_length = a.length;
     for(let i =0;i<a_length;i++){
         let s = a[i].innerHTML.trim();
-        if(!rg3.test(s)){
+        if(!rg2.test(s)){
             continue;
         }
         if(s.includes('￥')){
