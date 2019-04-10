@@ -4,7 +4,7 @@ let callback = function (records){
     //console.log('回调启动...');
     all();
 };
-let throttle_callback = _.throttle(callback,4000);
+let throttle_callback = _.throttle(callback,3500);
 
 let mo = new MutationObserver(throttle_callback);
 
@@ -367,9 +367,12 @@ const S3 = function(){
 const S2 = function(){
     let node_all = document.querySelectorAll('span[class="a-price-whole"]');
     let rg1 = /\,/g;
+    let rg2= /\<\!\-\-.+?\>/mg;
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
-        let s1 = parseInt( a.firstChild.data.replace(rg1,''));
+        //let s1 = parseInt( a.firstChild.data.replace(rg1,'')); 
+        let s1 = parseInt( a.innerText.replace(rg1,'')); 
+
         let s2 = parseFloat('.' + a.nextElementSibling.innerText)
         let s12 = s1+s2;
         let rmb = (s12/rate).toFixed(2);

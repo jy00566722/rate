@@ -86,6 +86,8 @@ const all=function(){
             S16();                                
         }
 
+        //<span class="price__jumboIntegerAmount">17,280</span> 这个需要处理
+
 
     })
 }
