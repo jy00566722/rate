@@ -38,12 +38,12 @@ const all=function(){
        if(document.querySelectorAll('span[class="p13n-sc-price"]')[0]){
              S3();
         };
-        if(document.querySelectorAll('span[class="a-color-price"]')[0]){
+        if(document.querySelectorAll('span[class="a-color-price"]')[0]){    
             S4();
        };
        if(document.querySelectorAll('span[class="a-size-medium a-color-price"]')[0]){
             S5();
-           // S5a();
+           // S5a();     //a-size-base a-color-secondary   //a-size-medium a-color-price offer-price a-text-normal
          };
         if(document.querySelectorAll('span[class="a-size-mini twisterSwatchPrice"]')[0]){
             S6();
