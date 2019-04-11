@@ -122,6 +122,8 @@ const all=function(){
             S1(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]'));
             //function_time('s18');
         }
+
+        //https://www.amazon.co.uk/Bargain-Finds/bbp/bb/ref=bbp_bb_757550_tr_w_9ea285?category=%2Fwomens   这个url的价要处理，产生了错误
     })
 }
 
