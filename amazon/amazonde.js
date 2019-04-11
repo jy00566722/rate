@@ -136,8 +136,6 @@ const all=function(){
             //function_time('s18');
         }
 
-        //<span aria-hidden="true"><span class="a-price-whole">5<span class="a-price-decimal">,</span></span><span class="a-price-fraction">24</span><span class="a-price-symbol">€</span><sub style="color: green;"> ￥37.90</sub></span>
-
 
 
 

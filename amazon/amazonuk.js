@@ -40,10 +40,10 @@ const all=function(){
            S1(document.querySelectorAll('span[class="a-size-medium"]'));
            //function_time('s1');
        };
-       if(document.querySelectorAll('span[class="a-price-whole"]')[0]){
+/*        if(document.querySelectorAll('span[class="a-price-whole"]')[0]){
             S2();
             //function_time('s2');
-       };
+       }; */
        if(document.querySelectorAll('span[class="p13n-sc-price"]')[0]){
              S3();
              //function_time('s3');
@@ -84,6 +84,9 @@ const all=function(){
             S12();  //很特别的价格   
             //function_time('s12');              
         };
+        if(document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]')[0]){
+            S12b();
+        }
         if(document.querySelectorAll('span[class="price price--jumbo"]')[0]){
             S13();  //很特别的价格     
             //function_time('s13');            
@@ -122,8 +125,13 @@ const all=function(){
             S1(document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockBuyingPriceString"]'));
             //function_time('s18');
         }
-
-        //https://www.amazon.co.uk/Bargain-Finds/bbp/bb/ref=bbp_bb_757550_tr_w_9ea285?category=%2Fwomens   这个url的价要处理，产生了错误
+        if(document.querySelectorAll('span[class="a-offscreen"]')[0]){
+            S2a(document.querySelectorAll('span[class="a-offscreen"]'));
+        }
+        if(document.querySelectorAll('span[class="a-color-base"]')[0]){
+            S1(document.querySelectorAll('span[class="a-color-base"]'));
+        }
+       
     })
 }
 
@@ -159,6 +167,25 @@ const S13 = function(){
     }
 }
 
+const S12b =function(){
+    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]');
+    for(const a of node_all){
+        if(!(a.lastElementChild.tagName=='SUB')){
+        if(a.hasAttribute('aria-label')){
+            let s = a.getAttributeNode('aria-label').value;   //£32.00
+            let rg1 = /^£(\d{1,3}\.){0,1}\d{1,3}\.\d{2}/;
+            if(rg1.test(s)){
+                let rmb = getRmb(s);
+                let c = document.createElement('sub');
+                c.style.color = "green";
+                c.innerHTML=' '+rmb;
+                a.appendChild(c);
+
+            }
+        }
+     }
+    }
+}
 
 const S12 = function(){
     let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]');
@@ -370,6 +397,22 @@ const S3 = function(){
             let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
             let rmb = (s/rate).toFixed(2);
             a.innerHTML = s2+`<sub style="color:green"> ￥${rmb}</sub>`;
+        }
+    }
+}
+
+const S2a = function(node_all){
+    let rg1 = /^(£){0,1}(\d{1,3}\,){0,}\d{1,3}(\.\d{2}){0,1}$/;
+    for(const a of node_all){
+        if(!(a.nextElementSibling===null)&&!(a.nextElementSibling.lastElementChild.tagName=='SUB')){
+            let s = a.innerHTML;
+            if(rg1.test(s)){
+                let rmb = getRmb(s);
+                let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=' '+rmb;
+                a.nextElementSibling.appendChild(b);
+            }
         }
     }
 }
