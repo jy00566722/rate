@@ -85,7 +85,11 @@ const all=function(){
             //function_time('s11');
         };
         if(document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]')[0]){
-            S12();  //很特别的价格   
+            S12a();  //很特别的价格   
+            //function_time('s12');              
+        };
+        if(document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]')[0]){
+            S12b();  //很特别的价格   
             //function_time('s12');              
         };
         if(document.querySelectorAll('span[class="price price--jumbo"]')[0]){
@@ -132,6 +136,8 @@ const all=function(){
             //function_time('s18');
         }
 
+        //<span aria-hidden="true"><span class="a-price-whole">5<span class="a-price-decimal">,</span></span><span class="a-price-fraction">24</span><span class="a-price-symbol">€</span><sub style="color: green;"> ￥37.90</sub></span>
+
 
 
 
@@ -168,6 +174,48 @@ const S13 = function(){
     }
 }
 
+const S12a =function(){
+    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]');
+    for(const a of node_all){
+        if(!(a.lastElementChild.tagName=='SUB')){
+        if(a.hasAttribute('aria-label')){
+            let s = a.getAttributeNode('aria-label').value;   //EUR 1.008,92
+            let rg1 = /^EUR (\d{1,3}\.){0,}\d{1,3}\,\d{2}/;
+            if(rg1.test(s)){
+                let s1 = s.replace('EUR ','').replace('.','').replace(',','.');
+                let s2 = parseFloat(s1);
+                let rmb = (s2/rate).toFixed(2);
+                let c = document.createElement('sub');
+                c.style.color = "green";
+                c.innerHTML=' ￥'+rmb;
+                a.appendChild(c);
+
+            }
+        }
+     }
+    }
+}
+const S12b =function(){
+    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]');
+    for(const a of node_all){
+        if(!(a.lastElementChild.tagName=='SUB')){
+        if(a.hasAttribute('aria-label')){
+            let s = a.getAttributeNode('aria-label').value;   //EUR 1.008,92
+            let rg1 = /^EUR (\d{1,3}\.){0,}\d{1,3}\,\d{2}/;
+            if(rg1.test(s)){
+                let s1 = s.replace('EUR ','').replace('.','').replace(',','.');
+                let s2 = parseFloat(s1);
+                let rmb = (s2/rate).toFixed(2);
+                let c = document.createElement('sub');
+                c.style.color = "green";
+                c.innerHTML=' ￥'+rmb;
+                a.appendChild(c);
+
+            }
+        }
+     }
+    }
+}
 
 const S12 = function(){
     let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]');
@@ -354,15 +402,26 @@ const S2 = function(){
     let node_all = document.querySelectorAll('span[class="a-price-whole"]');
     let rg1 = /\,/g;
     for(const a of node_all){
+        //这里有两种情况，一种是价格在一个span里，一个是分开的
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
-        let s1 = parseFloat( a.innerText.replace(rg1,'.'));
-        let rmb = (s1/rate).toFixed(2);
-        let b = document.createElement('sub');
-            b.style.color = "green";
-            b.innerHTML=' ￥'+rmb;
-            a.parentElement.appendChild(b);
+            if(a.nextElementSibling.className==='a-price-fraction'){
+                let s1 = parseFloat( a.innerText.replace(rg1,'.'));
+                let s2 = parseFloat('.'+a.nextElementSibling.innerHTML);
+                let rmb = ((s1+s2)/rate).toFixed(2);
+                let b = document.createElement('sub');
+                    b.style.color = "green";
+                    b.innerHTML=' ￥'+rmb;
+                    a.parentElement.appendChild(b);
 
+        }else if(a.nextElementSibling.className==='a-price-symbol'){
+            let s1 = parseFloat( a.innerText.replace(rg1,'.'));
+            let rmb = (s1/rate).toFixed(2);
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=' ￥'+rmb;
+                a.parentElement.appendChild(b);
         }
+    }
     }
 }
 

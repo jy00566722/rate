@@ -87,13 +87,43 @@ const all=function(){
         }
 
         //<span class="price__jumboIntegerAmount">17,280</span> 这个需要处理
-
+        //<span id="priceblock_ourprice" class="priceBlockBuyingPriceString a-size-medium a-color-price">￥ 2,980</span>  这个需要处理
+        //建立统一处理函数
+        if(document.querySelectorAll('span[class="price__jumboIntegerAmount"]')[0]){
+            SS(document.querySelectorAll('span[class="price__jumboIntegerAmount"]'));
+        }
+        if(document.querySelectorAll('span[class="priceBlockBuyingPriceString a-size-medium a-color-price"]')[0]){
+            SS(document.querySelectorAll('span[class="priceBlockBuyingPriceString a-size-medium a-color-price"]'));
+        }       
+        if(document.querySelectorAll('span[class="a-color-price a-text-bold"]')[0]){
+            SS(document.querySelectorAll('span[class="a-color-price a-text-bold"]'));
+        }
 
     })
 }
 
 
 //具体处理函数
+
+//统一处理，接收node_all
+const SS=function(node_all){
+    for(const a of node_all){
+        if(!(a.innerHTML.includes('元'))){
+            let s = a.innerHTML.trim();
+            let Rg = /^[JPY|\D] (\d{1,3}\,){0,}\d{1,3}( \- [JPY|\D] (\d{1,3}\,){0,}\d{1,3}){0,1}/;
+            if(Rg.test(s)){
+            let rmb = getRmb(s);
+/*             let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML=rmb;
+                a.parentElement.insertBefore(b,a.nextElementSibling); */
+            a.innerHTML= s + `<sub style="color:green"> ￥${rmb}</sub>`;
+
+            }
+        }
+    }
+}
+
 
 const S16=function(){
     let node_all = document.querySelectorAll('span[class="a-size-medium a-color-price priceBlockDealPriceString"]');
@@ -371,9 +401,10 @@ const S3 = function(){
     for(const a of node_all){
         if(!a.innerHTML.includes('元')){
             let s2 = a.innerHTML;
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green"> ${rmb}元</sub>`;
+            //let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
+            let rmb = getRmb(s2);
+            //let rmb = (s/rate).toFixed(2);
+            a.innerHTML = s2+`<sub style="color:green"> ${rmb}</sub>`;
         }
     }
 }
