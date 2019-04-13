@@ -91,7 +91,7 @@ const S16=function(){
     for(const a of node_all){
         if(!(a.nextElementSibling.tagName==='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^(\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- (\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -108,13 +108,16 @@ const S15=function(){
     for(const a of node_all){
         if(!(a.nextElementSibling.tagName==='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^(\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- (\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
                 b.style.color = "green";
                 b.innerHTML=rmb;
                 a.parentElement.insertBefore(b,a.nextElementSibling);
+            }else{
+                console.log(s);
+                console.log('正规匹配不成功.');
             }
         }
     }
@@ -185,7 +188,7 @@ const S11 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^(\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- (\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -217,7 +220,7 @@ const S9 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^(\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- (\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -234,7 +237,7 @@ const S8 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^(\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- (\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -308,7 +311,7 @@ const S5a = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^(\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- (\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');
@@ -357,9 +360,10 @@ const S3 = function(){
     for(const a of node_all){
         if(!a.innerHTML.includes('￥')){
             let s2 = a.innerHTML;
-            let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
-            let rmb = (s/rate).toFixed(2);
-            a.innerHTML = s2+`<sub style="color:green">￥${rmb}</sub>`;
+            //let s = parseFloat( s2.replace(rg1,'').replace(rg2,''));
+            //let rmb = (s/rate).toFixed(2);
+            let rmb =getRmb(s2);
+            a.innerHTML = s2+`<sub style="color:green">${rmb}</sub>`;
         }
     }
 }
@@ -393,7 +397,7 @@ const S1 = function(){
     for(const a of node_all){
         if(!(a.parentElement.lastElementChild.tagName=='SUB')){
             let s = a.innerHTML.trim();
-            let Rg = /^\$(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- \$(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
+            let Rg = /^(\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}( \- (\$|USD)(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}/;
             if(Rg.test(s)){
             let rmb = getRmb(s);
             let b = document.createElement('sub');

@@ -20,17 +20,17 @@
     "content_scripts":[
         {
             "matches":["https://*.lazada.com.my/*"],
-            "js":["js/Underscore.js","lazada/my.js"],
+            "js":["js/Underscore.js","lazada/my-new.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.lazada.com.ph/*"],
-            "js":["js/Underscore.js","lazada/ph.js"],
+            "js":["js/Underscore.js","lazada/ph-new.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.lazada.sg/*"],
-            "js":["js/Underscore.js","lazada/sg.js"],
+            "js":["js/Underscore.js","lazada/sg-new.js"],
             "run_at": "document_end"
         },
         {
@@ -40,7 +40,7 @@
         },
         {
             "matches":["https://*.lazada.vn/*"],
-            "js":["js/Underscore.js","lazada/vn.js"],
+            "js":["js/Underscore.js","lazada/vn-new.js"],
             "run_at": "document_end"
         },
         {
