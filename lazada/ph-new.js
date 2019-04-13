@@ -1,4 +1,4 @@
-console.log('马来西亚页面价格转换插件启动中...');
+console.log('Lazada菲律宾页面价格转换插件启动中...');
 
 //====统一监听body的改变，触发总回调
 let callback = function (records){
