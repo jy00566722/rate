@@ -35,7 +35,7 @@
         },
         {
             "matches":["https://*.lazada.co.id/*"],
-            "js":["js/Underscore.js","lazada/id.js"],
+            "js":["js/Underscore.js","lazada/id-new.js"],
             "run_at": "document_end"
         },
         {
@@ -45,7 +45,7 @@
         },
         {
             "matches":["https://*.lazada.co.th/*"],
-            "js":["js/Underscore.js","lazada/th.js"],
+            "js":["js/Underscore.js","lazada/th-new.js"],
             "run_at": "document_end"
         },
         {
