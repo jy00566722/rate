@@ -45,7 +45,7 @@ try{
 }
 
 const all=function(){
-    console.log('总回调启动...');
+    //console.log('总回调启动...');
     chrome.storage.local.get(["my_rate"],function(result){
         // rate = result.my_rate.rate_MYR;
          rate = result.my_rate[`rate_${country}`];

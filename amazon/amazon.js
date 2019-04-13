@@ -23,6 +23,7 @@ try{
 let rate = 0;
 let country = 'USD';
 
+
 //总回调
 const all=function(){
     console.log('总回调启动');

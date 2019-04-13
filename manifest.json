@@ -55,7 +55,7 @@
         },
         {
             "matches":["https://*.amazon.com/*"],
-            "js":["js/Underscore.js","amazon/amazon.js"],
+            "js":["js/Underscore.js","amazon/amazon-new.js"],
             "run_at": "document_end"
         },
         {
