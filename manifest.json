@@ -60,12 +60,12 @@
         },
         {
             "matches":["https://*.amazon.co.jp/*"],
-            "js":["js/Underscore.js","amazon/amazonjp.js"],
+            "js":["js/Underscore.js","amazon/amazonjp-new.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.amazon.co.uk/*"],
-            "js":["js/Underscore.js","amazon/amazonuk.js"],
+            "js":["js/Underscore.js","amazon/amazonuk-new.js"],
             "run_at": "document_end"
         },
         {
