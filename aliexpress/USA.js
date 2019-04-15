@@ -48,10 +48,6 @@ function all(){
         find_node(node_all);
         //特别处理详情页二段式价格
         P2();
-        //推荐页特别处理，单价在文本节点中
-        if(document.querySelectorAll('div[class="collection-card__price"]')[0]){
-            Gw();
-        }
     })
 }
 
