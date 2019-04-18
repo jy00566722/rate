@@ -17,6 +17,7 @@
     "background":{
         "scripts":["js/axios.min.js","js/background.js"]
     },
+    "web_accessible_resources": ["js/inject.js"],
     "content_scripts":[
         {
             "matches":["https://*.lazada.com.my/*"],
@@ -76,6 +77,11 @@
         {
             "matches":["https://*.aliexpress.com/*"],
             "js":["js/Underscore.js","aliexpress/USA.js"],
+            "run_at": "document_end"
+        },
+        {
+            "matches":["https://*.wish.com/*"],
+            "js":["js/Underscore.js","wish/wish.js"],
             "run_at": "document_end"
         }
         
