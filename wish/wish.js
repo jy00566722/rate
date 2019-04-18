@@ -1,6 +1,6 @@
 console.log('Wish价格转换插件启动..');
 
-let rate = 0;//当前国家的汇率  目前先做美元
+let cu = 0;//货币
 function injectCustomJs(jsPath)
 {
     jsPath = jsPath || 'js/inject.js';
@@ -17,14 +17,33 @@ function injectCustomJs(jsPath)
     document.head.appendChild(temp);
 }
 injectCustomJs();
+//监听来自页面的货币
+window.addEventListener("message", function(e)
+{
+    if(e.data.wish_me){
+        console.log('收到来自页面的货币信息'+e.data.wish_me);
+        cu = e.data.wish_me;
+    }
+   
+}, false);
 
+//<div class="PurchaseContainer__ActualPrice-sc-1qlezk8-5 kShVbX">د.إ.‏89AED</div>
+//<div class="PurchaseContainer__ActualPrice-sc-1qlezk8-5 kShVbX">$27USD</div>
+//<div class="FeedItemV2__ActualPrice-vf3155-8 eLVouZ">$2</div>
+//<div class="FeedItemV2__ActualPrice-vf3155-8 eLVouZ">₽782<span class="FeedItemV2__Subscript-vf3155-9 ldSwdr">RUB</span></div>
 let node_all=[
-    ['div','FeedItemV2__ActualPrice-vf3155-8 eLVouZ']
-
+    ['div','FeedItemV2__ActualPrice-vf3155-8 eLVouZ'],
+    ['div','PurchaseContainer__ActualPrice-sc-1qlezk8-5 kShVbX']
 ];
 //====统一监听body的改变，触发总回调
 let callback = function (records){
-    all();
+    if(cu ===0){
+        console.log('货币未设置好，不启动总回调');
+        return;
+    }else{
+        all();
+    }
+    
 };
 let throttle_callback = _.throttle(callback,4000);
 let mo = new MutationObserver(throttle_callback);
@@ -41,12 +60,14 @@ try{
 }
 function all(){
     console.log('总回调启动.');
-/*     chrome.storage.local.get(["my_rate"],function(result){
+    chrome.storage.local.get(["my_rate"],function(result){
 
-        rate = result.my_rate['rate_USD'];
+        rate = result.my_rate[`rate_${cu}`];
+        console.log('汇率为:');
+        console.log(rate);
         find_node(node_all);
 
-    }) */
+    })
 }
 //<div class="PurchaseContainer__ActualPrice-sc-1qlezk8-5 kShVbX">د.إ.‏89AED</div>
 //<div class="PurchaseContainer__ActualPrice-sc-1qlezk8-5 kShVbX">$27USD</div>
