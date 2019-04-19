@@ -1,9 +1,11 @@
 # rate
 
 > 这是一个跨境平台前端价格转化为人民币的插件,目前支持的平台有：    
-lazada    
-shopee    
-amazon    
+Lazada    
+Shopee    
+Amazon   
+Aliexpress 
+Wish
 ……
 
 
@@ -55,7 +57,7 @@ Wish:
 
 ### 介绍：
 
-此插件为lzada/shopee/Amazon卖家设计，用于显示lazada/shopee各站点前台页面上商品价格对应的人民币价格(在原价格右下方显示一个绿色的人民币价格，部分带有深色底色的地方会采用红色字),也方便卖家观察竞争对手的价格。
+此插件为lzada/shopee/Amazon/Wish/Aliexpress卖家设计，用于显示各站点前台页面上商品价格对应的人民币价格(在原价格右下方显示一个绿色的人民币价格，部分带有深色底色的地方会采用红色字),也方便卖家观察竞争对手的价格。
 
 PS:Lazada/Shopee买家也是可以用的，但使用场景感觉不多，海淘用户可以用。
 
