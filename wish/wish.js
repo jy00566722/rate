@@ -66,11 +66,11 @@ function all(){
         //console.log('汇率为:');
         //console.log(rate);
         ///find_node(node_all);
-        let node_1 = document.querySelectorAll('div[class="FeedItemV2__ActualPrice-vf3155-8 eLVouZ"]');  //搜索页面，首页
+        let node_1 = document.querySelectorAll('div[class="FeedItemV2__ActualPrice-vf3155-9 fgeAVX"]');  //搜索页面，首页
         if(node_1[0]){
             S1(node_1);
         }
-        let node_2 =document.querySelectorAll('div[class="PurchaseContainer__ActualPrice-sc-1qlezk8-5 kShVbX"]');  //详情页主价
+        let node_2 =document.querySelectorAll('div[class="PurchaseContainer__ActualPrice-sc-1qlezk8-6 yTftR"]');  //详情页主价
         if(node_2[0]){
             S2(node_2);
         }

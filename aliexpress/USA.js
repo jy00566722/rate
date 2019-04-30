@@ -50,20 +50,20 @@ function all(){
         P2();
     })
 }
-
+let rg2 =/^(US \$){0,1}\d{1,}(\.\d{2}){0,1}( \- \d{1,}\.\d{2}){0,1}/;
 //详情页主价二段式，特别处理
 function P2(){
     let low = document.querySelectorAll('span[itemprop="lowPrice"]')[0];
     let high = document.querySelectorAll('span[itemprop="highPrice"]')[0];
     if(low){
-        if(!low.innerHTML.includes('￥')){
+        if(!low.innerHTML.includes('￥')&&rg2.test(low.innerHTML)){
             console.log(low.innerHTML);
         let rmb =priceRmb(low.innerHTML);
         low.innerHTML = low.innerHTML+`<sub style="color:green"> ￥${rmb}</sub>`;
         }
     }
     if(high){
-        if(!high.innerHTML.includes('￥')){
+        if(!high.innerHTML.includes('￥')&&rg2.test(high.innerHTML)){
             console.log(high.innerHTML);
         let rmb =priceRmb(high.innerHTML);
         high.innerHTML = high.innerHTML+`<sub style="color:green"> ￥${rmb}</sub>`;
@@ -73,7 +73,7 @@ function P2(){
 }
 
 //let rg1 =/^(US \$){0,1}\d{1,}\.\d{2}$/;
-let rg2 =/^(US \$){0,1}\d{1,}(\.\d{2}){0,1}( \- \d{1,}\.\d{2}){0,1}/;
+
 //let rg3 =/^(US \$){0,1}\d{1,}\.\d{2}( \(about \d{1,}%\)){0,1}( \- \d{1,}\.\d{2}){0,1}/;
 //找出元素
 function find_node(node_all){
