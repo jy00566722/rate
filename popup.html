@@ -1,113 +1,158 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
-    <link rel="stylesheet" href="css/bluma.css">
-    <script defer src="js/vue.js"></script>
-    <script defer src="js/pop.js"></script>
-  </head>
-  <body>
-      <section class="hero is-primary">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">
-                汇率转换
-              </h1>
-              <h3 class="subtitle">
-                  Amazon/Aliexpress/Wish<br>Lazada/Shopee
-                </h3>
-              <h3 class="subtitle">
-                <a href="https://jinshuju.net/f/50eDUl" target="_blank">问题及建议点此</a>
-              </h3>
-            </div>
-          </div>
-        </section>
-  <section class="section" style="width:300px">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>汇率转换</title>
+  <link rel="stylesheet" href="css/bluma.css">
+  <script defer src="js/vue.js"></script>
+  
+</head>
+
+<body>
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          汇率转换
+        </h1>
+        <h3 class="subtitle">
+          Amazon/Aliexpress/Wish<br>Lazada/Shopee
+        </h3>
+        <h3 class="subtitle">
+          <a href="https://jinshuju.net/f/50eDUl" target="_blank">问题及建议点此</a>
+        </h3>
+      </div>
+    </div>
+  </section>
+  <div id="app">
+  <section>
+    <div class="field">
+      <div class="control">
+        <div class="select is-info">
+          <select v-model="rate1">
+            <!-- <option selected value=1>人民币/CNY</option> -->
+            <option v-for="i in rate" v-bind:value="i.value">{{i.name}}</option>
+           
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <input class="input" type="text" placeholder="请输入金额:" v-model="je1">
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <div class="select is-success">
+          <select v-model="rate2">
+              <!-- <option selected value=1>人民币/CNY</option> -->
+            <option v-for="i in rate" v-bind:value="i.value">{{i.name}}</option>
+          </select>
+          
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <input class="input" type="text" placeholder="请输入金额:" v-model="je2">
+      </div>
+    </div>
+
+
+  </section>
+  </div>
+
+  <section class="section" style="width:350px">
     <div class="container">
       <div class="columns is-mobile">
         <div class="column">
-                  <div class="field">
-                      <label class="label is-small">人民币CNY</label>
-                    <div class="control">
-                      <input class="input is-warning is-small" type="text"  id="Rate_CNY"  name = "rate_u34q">
-                    </div>
-                  </div>
-                  <div class="field">
-                      <label class="label is-small">美元USD</label>
-                    <div class="control">
-                      <input class="input is-info is-small" type="text"  id="Rate_USD"  name = "rate_u34q">
-                    </div>
-                  </div>
-                  <div class="field">
-                      <label class="label is-small">日元JPY</label>
-                    <div class="control">
-                      <input class="input is-info is-small" type="text"  id="Rate_JPY"  name = "rate_u34q">
-                    </div>
-                  </div>                  <div class="field">
-                      <label class="label is-small">英磅GBP</label>
-                    <div class="control">
-                      <input class="input is-info is-small" type="text"  id="Rate_GBP"  name = "rate_u34q">
-                    </div>
-                  </div>
-                  <div class="field">
-                      <label class="label is-small">欧元EUR</label>
-                    <div class="control">
-                      <input class="input is-info is-small" type="text"  id="Rate_EUR"  name = "rate_u34q">
-                    </div>
-                  </div>
-               
-                  <div class="field">
-                    <label class="label is-small">台湾TWD</label>
-                  <div class="control">
-                    <input class="input is-primary is-small" type="text"  id="Rate_TWD"  name = "rate_u34q">
-                  </div>
-                </div>
-
-      </div>
-      <div class="column">
           <div class="field">
-              <label class="label is-small">新加坡SGD</label>
+            <label class="label is-small">人民币CNY</label>
             <div class="control">
-              <input class="input is-info is-small" type="text"  id="Rate_SGD"  name = "rate_u34q">
+              <input class="input is-warning is-small" type="text" id="Rate_CNY" name="rate_u34q">
             </div>
           </div>
           <div class="field">
-              <label class="label is-small">菲律宾PHP</label>
+            <label class="label is-small">美元USD</label>
             <div class="control">
-              <input class="input is-primary is-small" type="text"  id="Rate_PHP"  name = "rate_u34q">
+              <input class="input is-info is-small" type="text" id="Rate_USD" name="rate_u34q">
             </div>
-          </div> 
-              <div class="field">
-                  <label class="label is-small">马来西亚MYR</label>
-                <div class="control">
-                  <input class="input is-info is-small" type="text"  id="Rate_MYR"  name = "rate_u34q">
-                </div>
-              </div>
-                <div class="field">
-                    <label class="label is-small">印尼IDR</label>
-                  <div class="control">
-                    <input class="input is-primary is-small" type="text"  id="Rate_IDR"  name = "rate_u34q">
-                  </div>
-                </div>
-                <div class="field">
-                    <label class="label is-small">泰国THB</label>
-                  <div class="control">
-                    <input class="input is-info is-small" type="text"  id="Rate_THB"  name = "rate_u34q">
-                  </div>
-                </div>
-                <div class="field">
-                    <label class="label is-small">越南VND</label>
-                  <div class="control">
-                    <input class="input is-primary is-small" type="text"  id="Rate_VND"  name = "rate_u34q">
-                  </div>
-                </div>
-               
+          </div>
+          <div class="field">
+            <label class="label is-small">日元JPY</label>
+            <div class="control">
+              <input class="input is-info is-small" type="text" id="Rate_JPY" name="rate_u34q">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">英磅GBP</label>
+            <div class="control">
+              <input class="input is-info is-small" type="text" id="Rate_GBP" name="rate_u34q">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">欧元EUR</label>
+            <div class="control">
+              <input class="input is-info is-small" type="text" id="Rate_EUR" name="rate_u34q">
+            </div>
+          </div>
 
-    </div>
-  </div>
+          <div class="field">
+            <label class="label is-small">台湾TWD</label>
+            <div class="control">
+              <input class="input is-primary is-small" type="text" id="Rate_TWD" name="rate_u34q">
+            </div>
+          </div>
+
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label is-small">新加坡SGD</label>
+            <div class="control">
+              <input class="input is-info is-small" type="text" id="Rate_SGD" name="rate_u34q">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">菲律宾PHP</label>
+            <div class="control">
+              <input class="input is-primary is-small" type="text" id="Rate_PHP" name="rate_u34q">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">马来西亚MYR</label>
+            <div class="control">
+              <input class="input is-info is-small" type="text" id="Rate_MYR" name="rate_u34q">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">印尼IDR</label>
+            <div class="control">
+              <input class="input is-primary is-small" type="text" id="Rate_IDR" name="rate_u34q">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">泰国THB</label>
+            <div class="control">
+              <input class="input is-info is-small" type="text" id="Rate_THB" name="rate_u34q">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-small">越南VND</label>
+            <div class="control">
+              <input class="input is-primary is-small" type="text" id="Rate_VND" name="rate_u34q">
+            </div>
+          </div>
+
+
+        </div>
+      </div>
     </div>
   </section>
-  </body>
+  <script defer src="js/pop.js"></script>
+  <script defer src="js/pop1.js"></script>
+</body>
+
 </html>

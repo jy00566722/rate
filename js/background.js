@@ -1,86 +1,90 @@
 
 //取得各国的汇率  放入storage
-function get_rate(){
+function get_rate() {
   console.log("执行获取汇率:");
   let url = 'http://q.deey.top:5306/custom-interface/call/Get_rate_redis';
-  axios.get(url).then(function(result){
-    console.log("从汇率接口返回的数据为:");
-    console.log(result.data);
-    let data = result.data.map(x=>JSON.parse(x));
+  axios.get(url).then(function (result) {
+    //console.log("从汇率接口返回的数据为:");
+    //console.log(result.data);
+    let data = result.data.map(x => JSON.parse(x));
     let d = {};
-    data.map(x=>{
+    data.map(x => {
       d[`rate_${x.tcur}`] = x.rate;
     })
-    d['rate_CNY']='1';  //添加人民币汇率
-    //d['rate_USD']='0.1455'; //暂时临时添加美元固定汇率 后续改为实时获取
-    chrome.storage.local.set({"my_rate":d},function(s){
+    d['rate_CNY'] = '1';  //添加人民币汇率
+    chrome.storage.local.set({ "my_rate": d }, function (s) {
       console.log("从接口获取的汇率数组已经保存在my_rate中,可以使用了.");
     });
-  }).catch(function(err){
+
+    //加入57国汇率，整理好后给自由换算用
+    console.log('解析后的数据为:');
+    console.log(data);
+    let z=[];
+    data.map(x=>{
+      let a = {};
+      a.name = x.ratenm.slice(4)+'/'+x.tcur;
+      a.value = x.rate;
+      z.push(a);
+    });
+    z.unshift({name:'人民币/CNY',value:1});
+    console.log('整理后的数据为:');
+    console.log(z);
+    chrome.storage.local.set({ "my_rate_z": z }, function (s) {
+      console.log("从接口获取的汇率数组已经保存在my_rate_z中,可以使用了.");
+    });
+
+
+  }).catch(function (err) {
     console.log(err);
   });
 }
 
 //初始化人币币中间值
-function init_CNY(){
-  chrome.storage.local.set({"my_CNY":100},function(s){
-      console.log("初始化人民币中间值为100.");
+function init_CNY() {
+  chrome.storage.local.set({ "my_CNY": 100 }, function (s) {
+    console.log("初始化人民币中间值为100.");
   });
 }
 
 //向激活的窗口，发送消息，弹出主界面
-function sendMessageToContentScript(message, callback)
-{
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs)
-    {
-        chrome.tabs.sendMessage(tabs[0].id, message, function(response)
-        {
-            if(callback) callback(response);
-        });
+function sendMessageToContentScript(message, callback) {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, message, function (response) {
+      if (callback) callback(response);
     });
+  });
 }
 
 get_rate();//初始化汇率
 init_CNY();//初始化人民币中间值
 //定时获取汇率，更新--每小时获取一次
-let se = setInterval(get_rate,300000);
+let se = setInterval(get_rate, 300000);
 
 
 //测试原生ajax
-function testAjax(){
+function testAjax() {
   console.log("Ajax test");
-    var xhr = new XMLHttpRequest();
-    xhr.timeout = 3000;
-    xhr.ontimeout = function (event) {
-        console.log("请求超时！");
+  var xhr = new XMLHttpRequest();
+  xhr.timeout = 3000;
+  xhr.ontimeout = function (event) {
+    console.log("请求超时！");
+  }
+  var formData = new FormData();
+  formData.append('tel', '187969');
+  formData.append('psw', '111111');
+  xhr.open('GET', 'http:/');
+  xhr.send(formData);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      console.log(xhr);
     }
-    var formData = new FormData();
-    formData.append('tel', '187969');
-    formData.append('psw', '111111');
-    xhr.open('GET', 'http:/');
-    xhr.send(formData);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log(xhr);
-        }
-        else {
-            console.log(xhr.statusText);
-        }
+    else {
+      console.log(xhr.statusText);
     }
+  }
 }
 
-//监控各站点元素调用情况，去除不必要的元素监控
-let as = {
-    uk : {s1:0,s2:0,s3:0,s4:0,s5:0,s6:0,s7:0,s8:0,s9:0,s10:0,s11:0,s12:0,s13:0,s14:0,s15:0,s16:0,s17:0,s18:0},
-    jp : {s1:0,s2:0,s3:0,s4:0,s5:0,s6:0,s7:0,s8:0,s9:0,s10:0,s11:0,s12:0,s13:0,s14:0,s15:0,s16:0,s17:0,s18:0},
-    de : {s1:0,s2:0,s3:0,s4:0,s5:0,s6:0,s7:0,s8:0,s9:0,s10:0,s11:0,s12:0,s13:0,s14:0,s15:0,s16:0,s17:0,s18:0}
-}
-//监听
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){   
-    if(request.op ==='add'){
-        as[request.cu][request.s] +=1;
-    }
-});
+
 
 
 
