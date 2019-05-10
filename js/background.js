@@ -1,8 +1,7 @@
-
 //取得各国的汇率  放入storage
 function get_rate() {
   console.log("执行获取汇率:");
-  let url = 'http://q.deey.top:5306/custom-interface/call/Get_rate_redis';
+  let url = 'http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chrome&v=1.8.0.0';
   axios.get(url).then(function (result) {
     //console.log("从汇率接口返回的数据为:");
     //console.log(result.data);
@@ -61,28 +60,7 @@ init_CNY();//初始化人民币中间值
 let se = setInterval(get_rate, 300000);
 
 
-//测试原生ajax
-function testAjax() {
-  console.log("Ajax test");
-  var xhr = new XMLHttpRequest();
-  xhr.timeout = 3000;
-  xhr.ontimeout = function (event) {
-    console.log("请求超时！");
-  }
-  var formData = new FormData();
-  formData.append('tel', '187969');
-  formData.append('psw', '111111');
-  xhr.open('GET', 'http:/');
-  xhr.send(formData);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      console.log(xhr);
-    }
-    else {
-      console.log(xhr.statusText);
-    }
-  }
-}
+
 
 
 
