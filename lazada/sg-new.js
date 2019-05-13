@@ -38,7 +38,9 @@ let node_all=[
     ['div','pswt-product-price'],
     ['div','item-discount-price'],
     ['div','product_price'],
-    ['span','price-label-prime']
+    ['span','price-label-prime'],
+    ['div','delivery-option-item__shipping-fee'],
+    ['span','price-label price-label-prim']  //详情页中的多买送促销信息
 ];
 
 
@@ -59,6 +61,9 @@ const qs9=function(node,classname){
         let s = a[i].innerHTML.trim();
         if(s.includes('￥')){
             //console.log('包括￥,不再计算');
+            continue;
+        }
+        if(s==''||s=='Free'){
             continue;
         }
 /*         if(!(rg.test(s))){
