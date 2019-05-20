@@ -12,7 +12,7 @@ Wish
 
 ##### [chrome扩展](https://chrome.google.com/webstore/detail/%E6%B1%87%E7%8E%87%E8%BD%AC%E6%8D%A2/bcpgdpedphodjcjlminjbdeejccjbimp?hl=zh-CN)
 
-##### [360安全浏览器](https://ext.se.360.cn/webstore/detail/bgfcdfgjkfbfbdhfplojpnbiggdkiiih)
+##### [360安全浏览器](https://ext.se.360.cn/webstore/detail/hijccaodmbcgjodgoalekjnnnbpkpfch)
 
 `注：由于插件审核需要时间，所以在插件市场上的，可能不是最新版本. 特别是360插件市场的审核非常慢。`
  ##### 如果360市场不是最新的1.2.3.0版本，可以使用这个离线[crx文件](http://g.deey.top/rate-360-1.2.3.0.crx)安装. 注意这个crx文件只适用于360安全浏览器，不适用于chrome浏览器。
