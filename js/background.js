@@ -1,7 +1,7 @@
 //取得各国的汇率  放入storage
 function get_rate() {
   console.log("执行获取汇率:");
-  let url = 'http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chrome&v=1.8.0.0';
+  let url = 'http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chromeA&v=1.9.0.0';
   axios.get(url).then(function (result) {
     //console.log("从汇率接口返回的数据为:");
     //console.log(result.data);
