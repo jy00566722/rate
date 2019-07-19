@@ -1,6 +1,6 @@
 {
     "name":"汇率转换",
-    "version":"2.0.0.0",
+    "version":"1.9.0.0",
     "manifest_version":2,
     "description":"此插件为跨境卖家设计，用于显示跨境平台站点前台页面上商品价格对应的人民币价格。同时也提供手动输入数字转换货币的功能，可以互转货币的货币种类共有57个",
     "icons":{
@@ -78,6 +78,11 @@
         {
             "matches":["https://*.aliexpress.com/*"],
             "js":["js/Underscore.js","aliexpress/USA.js"],
+            "run_at": "document_end"
+        },
+        {
+            "matches":["https://*.wish.com/*"],
+            "js":["js/Underscore.js","wish/wish.js"],
             "run_at": "document_end"
         }
         

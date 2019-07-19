@@ -52,7 +52,8 @@ const all=function(){
         //特别价格处理
         let e1 = document.querySelectorAll('span[class="a-offscreen"]');
         if(e1[0]){
-            t1(e1);
+            //t1(e1);
+            S2();
         }
 
         if(document.querySelectorAll('span[class="sx-price sx-price-large"]')[0]){
@@ -238,6 +239,26 @@ const S7 = function(){
                     a.appendChild(b);
             }
             
+        }
+    }
+}
+const S2 = function(){
+    let node_all = document.querySelectorAll('span[class="a-price-whole"]');
+    let rg1 = /\,/g;
+    let rg2= /\<\!\-\-.+?\>/mg;
+    for(const a of node_all){
+        if(!(a.parentElement.lastElementChild.tagName=='SUB')){
+        //let s1 = parseInt( a.firstChild.data.replace(rg1,'')); 
+        let s1 = parseInt( a.innerText.replace(rg1,'')); 
+
+        let s2 = parseFloat('.' + a.nextElementSibling.innerText)
+        let s12 = s1+s2;
+        let rmb = (s12/rate).toFixed(2);
+        let b = document.createElement('sub');
+            b.style.color = "green";
+            b.innerHTML='￥'+rmb;
+            a.parentElement.appendChild(b);
+
         }
     }
 }

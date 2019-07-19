@@ -34,7 +34,6 @@ var app = new Vue({
             console.log("从storage中取出来的汇率数据为:");
             console.log(result);
             self.rate = result.my_rate_z
-
         });
     },
     methods:{

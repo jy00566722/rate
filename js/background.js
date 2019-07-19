@@ -1,7 +1,8 @@
 //取得各国的汇率  放入storage
-function get_rate() {
+async function get_rate() {
   console.log("执行获取汇率:");
-  let url = 'http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chromeA&v=1.9.0.0';
+  const u = await getU();
+  let url = `http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chromeA&v=1.9.0.0&u=${u}`;
   axios.get(url).then(function (result) {
     //console.log("从汇率接口返回的数据为:");
     //console.log(result.data);
@@ -25,6 +26,9 @@ function get_rate() {
       a.value = x.rate;
       z.push(a);
     });
+    z.sort(function (item1, item2) {
+      return item1['name'].localeCompare(item2['name'], 'zh-CN');
+    })
     z.unshift({name:'人民币/CNY',value:1});
     console.log('整理后的数据为:');
     console.log(z);
@@ -53,6 +57,36 @@ function sendMessageToContentScript(message, callback) {
     });
   });
 }
+//生成唯一id
+function getRandomToken() {
+  var randomPool = new Uint8Array(32);
+  crypto.getRandomValues(randomPool);
+  var hex = '';
+  for (var i = 0; i < randomPool.length; ++i) {
+      hex += randomPool[i].toString(16);
+  }
+  return hex;
+}
+//获取userid
+function getU(){
+  return new Promise(function(resolve,reject){
+    chrome.storage.sync.get('userid', function(items) {
+      var userid = items.userid;
+      if (userid) {
+          resolve(userid);
+      } else {
+          userid = getRandomToken();
+          chrome.storage.sync.set({userid: userid}, function() {
+              resolve(userid);
+          });
+      }
+    });
+  })
+}
+
+
+
+
 
 get_rate();//初始化汇率
 init_CNY();//初始化人民币中间值

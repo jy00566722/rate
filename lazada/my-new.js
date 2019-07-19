@@ -38,6 +38,7 @@ let node_all=[
     ['div','pswt-product-price'],
     ['div','item-discount-price'],
     ['div','delivery-option-item__shipping-fee'],
+    ['div','discount-price'],
     ['span','price-label price-label-prim']  //详情页中的多买送促销信息
 ];
 

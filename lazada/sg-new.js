@@ -40,6 +40,7 @@ let node_all=[
     ['div','product_price'],
     ['span','price-label-prime'],
     ['div','delivery-option-item__shipping-fee'],
+    ['div','discount-price'],
     ['span','price-label price-label-prim']  //详情页中的多买送促销信息
 ];
 
