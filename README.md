@@ -14,7 +14,7 @@
 ######Aliexpress速卖通:
 ![未命名1558356422.png](https://i.loli.net/2019/05/20/5ce2a1d457ae453174.png)
 
-######57国货币自由转换:
+######163国货币自由转换:
 ![汇率转换.jpg](https://i.loli.net/2019/05/20/5ce2a2ff7fdea76635.jpg)
 
 
@@ -57,7 +57,7 @@ lazada:
 - 越    南：https://www.lazada.vn/
 - 泰    国：https://www.lazada.co.th/
 
-Shopee:
+Shopee:  (特别注意要用新网址，不要用以前的带xiapi的网址)
 - 马来西亚：https://shopee.com.my/
 - 菲律宾  ：https://shopee.ph/
 - 新加坡  ：https://shopee.sg/
@@ -76,7 +76,7 @@ Amazon:  (请注意切换为本地货币:如美国站，切换为美元货币。
 - https://www.aliexpress.com/    (使用时注意切换货币单位为美元，后续会支持更多货币)
 
 Wish:
-- https://www.wish.com/  (支持57种货币汇率转换，需要前台登陆)
+- https://www.wish.com/  (Wish暂停支持，前台国家切换方式变换，暂时没有找到好的方法解决)
 
 
 ### 介绍：
@@ -107,7 +107,8 @@ Wish:
 ### 更新记录
 
 ```
-- 2.0.0.0    2019年7月10日 暂停wish /修改说明，去掉关键字(chrome商店要求)
+- 2.1.0.0    2019年7月20日 货币自由转换部分，按国家的拼音排序  目前增加到了164个货币
+- 2.0.0.0    2019年7月10日 暂停wish /修改说明，去掉关键字(例如shopee/lazada/amazon等)(chrome说我滥用关键词-因为这个原因被下架了一次)
 - 1.9.0.0    2019年5月20日 修复Aliexpress详情页价格显示
 - 1.8.0.0    2019年5月09日 按钮页面增加57国汇率自由转换
 - 1.7.0.0    2019年4月30日 修复Wish价格问题(页面元素变化)
