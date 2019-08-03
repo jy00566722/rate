@@ -19,6 +19,8 @@ if(URL.includes('.my/')){
     country = 'THB';
 }else if(URL.includes('.vn/')){
     country = 'VND';
+}else if(URL.includes('xiapibuy.com')){
+    country = 'TWD';
 }
 
 console.log(country);
