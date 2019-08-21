@@ -2,7 +2,7 @@
 async function get_rate() {
   console.log("执行获取汇率:");
   const u = await getU();
-  let url = `http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chromeA&v=2.3.0.0&u=${u}`;
+  let url = `http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chromeA&v=2.4.0.0&u=${u}`;
   axios.get(url).then(function (result) {
     //console.log("从汇率接口返回的数据为:");
     //console.log(result.data);
