@@ -137,7 +137,7 @@ const qs9=function(nodes){
 const t1=function(nodes){
     nodes.forEach(x=>{
         let s = x.innerHTML.trim().replace('€','').replace('&nbsp;','').replace('.','').replace(',','.');;
-        if(x.nextElementSibling&&!x.nextElementSibling.lastElementChild.innerHTML.includes('￥')){
+        if(x.nextElementSibling&&x.nextElementSibling.lastElementChild&&x.nextElementSibling.lastElementChild.innerHTML&&!x.nextElementSibling.lastElementChild.innerHTML.includes('￥')){
         let rmb = (parseFloat(s)/rate).toFixed(2);
         let b = document.createElement('sub');
             b.style.color = "green";
