@@ -107,6 +107,7 @@ Wish:
 ### 更新记录
 
 ```
+- 2.5.0.0    2019年8月23日 增加shopee6个国家的镜像站支持，my.xiapibuy.com   th.xiapibuy.com等。
 - 2.4.5.0    2019年8月21日 修复Amazon德国搜索中的显示问题
 - 2.4.0.0    2019年8月21日 修复shopee镜像站显示问题，增加新的台湾镜像站支持 https://xiapi.xiapibuy.cc
 - 2.3.0.0    2019年8月02日 虾皮台湾站增加国内可访问的镜像站支持: https://xiapi.xiapibuy.com

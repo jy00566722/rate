@@ -5,21 +5,21 @@ let URL = document.URL;
 //console.log(URL);
 let country = '';
 
-if(URL.includes('.my/')){
+if(URL.includes('.my/') || URL.includes('my.xiapibuy.com')){
     country = 'MYR';
-}else if(URL.includes('.ph/')){
+}else if(URL.includes('.ph/') ||URL.includes('ph.xiapibuy.com')){
     country = 'PHP';
-}else if(URL.includes('.sg/')){
+}else if(URL.includes('.sg/') || URL.includes('sg.xiapibuy.com')){
     country = 'SGD';
-}else if(URL.includes('.id/')){
+}else if(URL.includes('.id/')|| URL.includes('id.xiapibuy.com')){
     country = 'IDR';
 }else if(URL.includes('.tw/')){
     country = 'TWD';
-}else if(URL.includes('.th/')){
+}else if(URL.includes('.th/') || URL.includes('th.xiapibuy.com')){
     country = 'THB';
-}else if(URL.includes('.vn/')){
+}else if(URL.includes('.vn/') || URL.includes('vn.xiapibuy.com')){
     country = 'VND';
-}else if(URL.includes('xiapibuy.com')){
+}else if(URL.includes('xiapi.xiapibuy.com')|| URL.includes('xiapi.xiapibuy.cc')){
     country = 'TWD';
 }
 
