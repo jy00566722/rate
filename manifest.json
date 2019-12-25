@@ -1,6 +1,6 @@
 {
     "name":"汇率转换",
-    "version":"2.5.0.0",
+    "version":"2.6.0.0",
     "manifest_version":2,
     "description":"此插件为跨境卖家设计，用于显示跨境平台站点前台页面上商品价格对应的人民币价格。同时也提供手动输入数字转换货币的功能，可以互转货币的货币种类共有164个",
     "icons":{
@@ -100,7 +100,8 @@
     "browser_action":{
         "default_icon":"image/128.png",
         "default_title":"汇率转换",
-        "default_popup":"popup.html"
+        "default_popup":"index.html"
+       
     },
     "content_security_policy": "script-src 'self'  'unsafe-eval'; object-src 'self'",
     "options_page":"options.html"

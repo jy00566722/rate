@@ -74,7 +74,9 @@ let node_all = [
     ['span','SlvYAy'],
     ['div','item-card-special__current-price item-card-special__current-price--special item-card-special__current-price--ofs'],
     ['span','_3g0idS _1OFcS5'],//iphone搜索页
-    ['div','_2aoS3Y']  //台湾首页团团转
+    ['div','_2aoS3Y'],  //台湾首页团团转
+    ['span','r3xOg7'] , //2019-12-25加
+    ['span','_3HwhOc _341bF0']
 ];
 
 const Gw = function(){
@@ -92,6 +94,7 @@ const Gw = function(){
             let me = document.createElement('sub');
                 me.style.color = "green";
                 me.innerHTML = ` ￥${rmb}`;
+                me.title = `￥${rmb}`;
                 i.parentNode.appendChild(me);
         }else{
            // console.log(i.parentNode.lastChild.tagName);
@@ -116,8 +119,11 @@ const qs9=function(node,classname){
         if(s.includes('￥')){
             continue;
         }
+        if(a[i].children.length>0){
+            continue;
+        }
         let rmb = priceRmb(s);
-        a[i].innerHTML=s + `<sub style="color:green"> ￥${rmb}</sub>`;
+        a[i].innerHTML=s + `<sub style="color:green" title="￥${rmb}"> ￥${rmb}</sub>`;
     }
 }
 

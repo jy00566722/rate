@@ -41,7 +41,8 @@ let node_all=[
     ['span','price-label-prime'],
     ['div','delivery-option-item__shipping-fee'],
     ['div','discount-price'],
-    ['span','price-label price-label-prim']  //详情页中的多买送促销信息
+    ['span','price-label price-label-prim'] , //详情页中的多买送促销信息
+    ['div','p-slider-product-price']
 ];
 
 
@@ -72,7 +73,7 @@ const qs9=function(node,classname){
             continue;
         } */
         let rmb = getRmb(s);
-        a[i].innerHTML=s + `<sub style="color:green"> ￥${rmb}</sub>`;
+        a[i].innerHTML=s + `<sub style="color:green" title="￥${rmb}"> ￥${rmb}</sub>`;
  
     }
 }
