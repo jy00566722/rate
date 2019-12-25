@@ -94,10 +94,17 @@ const  getRmb = function(s){
 
 //总回调
 const all = function(){
-    chrome.storage.local.get(["my_rate"],function(result){
-        rate = result.my_rate['rate_MYR'];
-        Sa9(node_all);
-    })
+    chrome.storage.local.get(['lazada_tag'],function(s){
+        const {lazada_tag} = s
+        if(lazada_tag){
+            chrome.storage.local.get(["my_rate"],function(result){
+                rate = result.my_rate['rate_MYR'];
+                Sa9(node_all);
+            })
+        }else{
+            console.log('lazada开关关闭')
+        }
 
+    })
 }
 

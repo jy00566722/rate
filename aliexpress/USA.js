@@ -25,7 +25,15 @@ let node_all = [
 ];
 //====统一监听body的改变，触发总回调
 let callback = function (records) {
-    all();
+    chrome.storage.local.get(['aliexpress_tag'],function(s){
+        const {aliexpress_tag} = s
+        if(aliexpress_tag){
+            all();
+        }else{
+            console.log('aliexpress开关关闭')
+        }
+
+    })
 };
 let throttle_callback = _.throttle(callback, 3000);
 let mo = new MutationObserver(throttle_callback);

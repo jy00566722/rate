@@ -28,7 +28,18 @@ let rate = 0;//当前国家的汇率
 //====统一监听body的改变，触发总回调
 let callback = function (records){
     //console.log('回调启动...');
-    all();
+
+    chrome.storage.local.get(['shopee_tag'],function(s){
+        const {shopee_tag} = s
+        if(shopee_tag){
+            all();
+        }else{
+            console.log('shopee开关关闭')
+        }
+
+    })
+
+    
 };
 let throttle_callback = _.throttle(callback,3000);
 

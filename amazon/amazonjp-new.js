@@ -2,7 +2,15 @@ console.log('Amazon日本站价格转换插件启动...');
 //====统一监听body的改变，触发总回调
 let callback = function (records){
     //console.log('回调启动...');
-    all();
+    chrome.storage.local.get(['amazon_tag'],function(s){
+        const {amazon_tag} = s
+        if(amazon_tag){
+            all();
+        }else{
+            console.log('amazon开关关闭')
+        }
+
+    })
 };
 let throttle_callback = _.throttle(callback,3500);
 

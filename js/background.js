@@ -164,12 +164,28 @@ function getU(){
   })
 }
 
-/*  chrome.storage.onChanged.addListener(function(obj,areaName){
+/*   chrome.storage.onChanged.addListener(function(obj,areaName){
   console.log('storage改变:')
   console.log(obj)
-  console.log(areaName)
-})  */
+  
+})  */ 
+chrome.runtime.onInstalled.addListener(function(e){
+     //初始化货币国家
+    let countries = ['CNY','USD','PHP','TWD','MYR','VND']
+     chrome.storage.local.set({ "my_rate_zz_countries": countries }, function (s) {  
+      console.log("初始化::货币列表在my_rate_zz_countries中...");
+    }); 
+    //初始化各站点标记
+    let lazada_tag = true
+    let shopee_tag = true
+    let amazon_tag = true
+    let aliexpress_tag = true
+    chrome.storage.local.set({lazada_tag},function(){console.log('lazada_tag设置成功')})
+    chrome.storage.local.set({shopee_tag},function(){console.log('shopee_tag设置成功')})
+    chrome.storage.local.set({amazon_tag},function(){console.log('amazon_tag设置成功')})
+    chrome.storage.local.set({aliexpress_tag},function(){console.log('aliexpress_tag设置成功')})
 
+})
 
 
 get_rate();//初始化汇率
