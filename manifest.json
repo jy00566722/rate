@@ -11,9 +11,8 @@
     "incognito":"spanning",
     "permissions":[
         "storage",
-        "tabs",
-        "http://q.deey.top:5306/",
-        "identity"
+        "https://rate.lizudi.top/"
+        
     ],
     "background":{
         "scripts":["js/axios.min.js","js/background.js"]

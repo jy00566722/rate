@@ -54,8 +54,8 @@ let google_2 = [{"name":"美元","abbreviation":"USD","symbol":"$","flagURL":"as
 
 async function get_rate() {
   console.log("执行获取汇率:");
-  const u = await getU();
-  let url = `http://q.deey.top:5306/custom-interface/call/Get_rate_redis?a=chromeA&v=2.4.0.0&u=${u}`;
+  //const u = await getU();
+  let url = `https://rate.lizudi.top/custom-interface/call/Get_rate_redis?a=chromeA&v=2.7.0.0&u=10000`;
   axios.get(url).then(function (result) {
     //console.log("从汇率接口返回的数据为:");
     //console.log(result.data);
@@ -137,7 +137,7 @@ function sendMessageToContentScript(message, callback) {
     });
   });
 }
-//生成唯一id
+/* //生成唯一id
 function getRandomToken() {
   var randomPool = new Uint8Array(32);
   crypto.getRandomValues(randomPool);
@@ -162,7 +162,7 @@ function getU(){
       }
     });
   })
-}
+} */
 
 /*   chrome.storage.onChanged.addListener(function(obj,areaName){
   console.log('storage改变:')
