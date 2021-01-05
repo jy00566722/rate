@@ -52,20 +52,7 @@ const all=function(){
         if(e1[0]){
             t1(e1);
         }
-/**
-        if(document.querySelectorAll('span[class="sx-price sx-price-large"]')[0]){
-            S7();
-        }
-        if(document.querySelectorAll('span[class="price price--jumbo"]')[0]){
-            S13();
-        }
-        if(document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]')[0]){
-            S12();
-        }
-        if(document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]')[0]){
-            S12a();
-        }
-        **/
+
     })
 }
 //德语下:369,99 € - 2.099,99 € |EUR 32,40 - EUR 123,66 |EUR 25,19 - EUR 60,11 |EUR 35,48 |99,95&nbsp;€ |1.709,98&nbsp;€
@@ -141,121 +128,33 @@ const qs9=function(nodes){
     })
    
 }
+
+function isNumber(val){
+
+    var regPos = /^\d+(\.\d+)?$/; //非负浮点数
+    var regNeg = /^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/; //负浮点数
+    if(regPos.test(val) && regNeg.test(val)){
+        return true;
+    }else{
+        return false;
+    }
+
+}
 //<span class="a-offscreen">30,99&nbsp;€</span>                   | 1.709,98&nbsp;€   |€&nbsp;13,37 |30,99&nbsp;€
 const t1=function(nodes){
     nodes.forEach(x=>{
         let s = x.innerHTML.trim().replace('€','').replace('&nbsp;','').replace('.','').replace(',','.');;
         if(x.nextElementSibling&&x.nextElementSibling.lastElementChild&&x.nextElementSibling.lastElementChild.innerHTML&&!x.nextElementSibling.lastElementChild.innerHTML.includes('￥')){
         let rmb = (parseFloat(s)/rate).toFixed(2);
+        if(isNumber(rmb)){
         let b = document.createElement('sub');
             b.style.color = "green";
             b.innerHTML = '￥'+rmb;
             x.nextElementSibling.appendChild(b);
         }
+        }
     })
 }
-const S13 = function(){
-    let node_all = document.querySelectorAll('span[class="price price--jumbo"]');
-    for(const a of node_all){
-        if(a.childElementCount==4){
-            let s = parseFloat( a.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ a.children[3].innerHTML);
-            let rmb = (s/rate).toFixed(2);
-            let c = document.createElement('sub');
-            c.style.color = "green";
-            c.innerHTML='￥'+rmb;
-            a.appendChild(c);
 
-        }
-    }
-}
-const S12a = function(){
-    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]');
-    for(const a of node_all){
-        if(!(a.lastElementChild.tagName=='SUB')){
-        if(a.childElementCount==1){
-            let b = a.children[0];
-            let s = parseFloat( b.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b.children[3].innerHTML);
-            let rmb = (s/rate).toFixed(2);
-            let c = document.createElement('sub');
-            c.style.color = "green";
-            c.innerHTML='￥'+rmb;
-            a.appendChild(c);
-        }else if(a.childElementCount==2){
-            let b = a.children[0];
-            let s = parseFloat( b.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b.children[3].innerHTML);
-            let rmb = (s/rate).toFixed(2);
 
-            let b1 = a.children[1];
-            let s1 = parseFloat( b1.children[2].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b1.children[4].innerHTML);
-            let rmb1 = (s1/rate).toFixed(2);
-            let c = document.createElement('sub');
-            c.style.color = "green";
-            c.innerHTML='￥'+rmb+' - ￥'+rmb1;
-            a.appendChild(c);
-            }
-        }
-    }
-}
-const S12 = function(){
-    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]');
-    for(const a of node_all){
-        if(!(a.lastElementChild.tagName=='SUB')){
-        if(a.childElementCount==1){
-            let b = a.children[0];
-            let s = parseFloat( b.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b.children[3].innerHTML);
-            let rmb = (s/rate).toFixed(2);
-            let c = document.createElement('sub');
-            c.style.color = "green";
-            c.innerHTML='￥'+rmb;
-            a.appendChild(c);
-        }else if(a.childElementCount==2){
-            let b = a.children[0];
-            let s = parseFloat( b.children[1].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b.children[3].innerHTML);
-            let rmb = (s/rate).toFixed(2);
 
-            let b1 = a.children[1];
-            let s1 = parseFloat( b1.children[2].innerHTML.replace(/\,/g,'')) +parseFloat('.'+ b1.children[4].innerHTML);
-            let rmb1 = (s1/rate).toFixed(2);
-            let c = document.createElement('sub');
-            c.style.color = "green";
-            c.innerHTML='￥'+rmb+' - ￥'+rmb1;
-            a.appendChild(c);
-            }
-        }
-    }
-}
-
-const S7 = function(){
-    let node_all = document.querySelectorAll('span[class="sx-price sx-price-large"]');
-    let rg1 = /\,/g;
-    for(const a of node_all){
-        if(!(a.lastElementChild.style.color=='green')){
-            if(a.childElementCount==7){
-                let s1 = a.children[1].innerText;
-                let s2 = a.children[2].innerText;
-                let s3 = a.children[5].innerText;
-                let s4 = a.children[6].innerText;
-                let s = parseFloat( s1.replace(rg1,'')) + parseFloat('.'+ s2);
-                let ss = parseFloat( s3.replace(rg1,'')) + parseFloat('.'+ 4);
-                let s_ = (s/rate).toFixed(2);
-                let _s = (ss/rate).toFixed(2);
-                let rmb = `￥${s_} - ￥${_s}`;
-                let b = document.createElement('sub');
-                    b.style.color = "green";
-                    b.innerHTML=rmb;
-                    a.appendChild(b);
-            }else if(a.childElementCount==3){
-                let s1 = a.children[1].innerText;
-                let s2 = a.children[2].innerText;
-                let s = parseFloat( s1.replace(rg1,'')) + parseFloat('.'+ s2);
-                let s_ = (s/rate).toFixed(2);
-                let rmb = `￥${s_}`;
-                let b = document.createElement('sub');
-                    b.style.color = "green";
-                    b.innerHTML=rmb;
-                    a.appendChild(b);
-            }
-            
-        }
-    }
-}

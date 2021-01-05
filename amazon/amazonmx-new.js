@@ -1,15 +1,14 @@
-console.log('Amazon英国站价格转换插件启动...');
+console.log('Amazon墨西哥站价格转换插件启动...');
 //====统一监听body的改变，触发总回调
 let callback = function (records) {
     //console.log('回调启动...');
-    chrome.storage.local.get(['amazon_tag'],function(s){
-        const {amazon_tag} = s
-        if(amazon_tag){
+    chrome.storage.local.get(['amazon_tag'], function (s) {
+        const { amazon_tag } = s
+        if (amazon_tag) {
             all();
-        }else{
+        } else {
             console.log('amazon开关关闭')
         }
-
     })
 };
 let throttle_callback = _.throttle(callback, 3500);
@@ -29,9 +28,8 @@ try {
 }
 
 let rate = 0;
-let country = 'GBP';
+let country = 'MXN';
 let S = new Set();
-
 
 let node_all = [
     ['span', 'a-size-'],
@@ -40,38 +38,25 @@ let node_all = [
 ];
 //总回调
 const all = function () {
-    console.log('总回调启动..');
+    console.log('总回调启动');
     chrome.storage.local.get(["my_rate"], function (result) {
         rate = result.my_rate[`rate_${country}`];
-       // console.log('汇率为:'+rate)
         S.clear();
         Sa9(node_all);
         //console.log(S);
         foo(S);
 
         //特别价格处理
-        // let e1 = document.querySelectorAll('span[class="a-offscreen"]');
-        // if(e1[0]){
-        //     t1(e1);
-        // }
-        if (document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]')[0]) {
-            S12();
+        let e1 = document.querySelectorAll('span[class="a-offscreen"]');
+        if (e1[0]) {
+            t1(e1);
         }
-        if (document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]')[0]) {
-            S12a();
-        }
-        if (document.querySelectorAll('span[class="price price--jumbo"]')[0]) {
-            S13();
-        }
-        let e2 = document.querySelectorAll('span[class="a-price-whole"]');
-        if (e2[0]) {
-        
-            S2(e2);
-        }
+
     })
 }
-
-let rg = /^£(\d{1,3}\,){0,}\d{1,3}(\.\d{2}){0,1}( \- £(\d{1,3}\,){0,}\d{1,3}\.\d{2}){0,1}$/;         //£8.80 - £33.06
+//$2,234.27 
+let rg2 = /^R\$\d{1,}\,\d{1,}( - R\$\d{1,}\,\d{1,2}){0,1}$/
+let rg1 = /^\$(\d+\,){0,}\d{1,}\.\d{0,}$/
 
 //从Set中取出元素，然后替换html
 const foo = function (s) {
@@ -81,21 +66,25 @@ const foo = function (s) {
         x.innerHTML = a + `<sub style="color:green"> ￥${rmb}</sub>`;
     })
 }
-//   £76.50 - £126.43  £125.41  £46.46 - £140.00  £25.99
 //计算人民币
 const getRmb = function (s) {
     let r1 = /^[^0-9]*/i;
     let r2 = /,/g;
+    let r3 = /[^0-9]*$/;
+
     if (!s.includes('-')) {
-        let a = s.trim().replace(r1, '').replace(r2, '');
+        let a = s.trim().replace(r1, '').replace(r3, '').replace(r2, '');
         let b = parseFloat(a);
         let rmb = (b / rate).toFixed(2);
         return rmb;
     } else {
         let [s1, s2] = s.split('-');
-        s1 = s1.trim().replace(r1, '').replace(r2, '');
-        s2 = s2.trim().replace(r1, '').replace(r2, '');
-        let rmb = (s1 / rate).toFixed(2) + ' - ￥' + (s2 / rate).toFixed(2);
+        s1 = s1.trim().replace(r1, '').replace(r3, '').replace(r2, '');
+        s2 = s2.trim().replace(r1, '').replace(r3, '').replace(r2, '');
+
+        let b1 = parseFloat(s1);
+        let b2 = parseFloat(s2);
+        let rmb = (b1 / rate).toFixed(2) + ' - ￥' + (b2 / rate).toFixed(2);
         return rmb;
     }
 
@@ -116,7 +105,7 @@ const Sa9 = function (node_all) {
 const qs9 = function (nodes) {
     nodes.forEach(x => {
         let b = x.innerHTML.trim();
-        if (rg.test(b)) {
+        if (rg1.test(b)) {
             S.add(x);
         } else {
             //console.log('正则匹配不成功的元素内容为:');
@@ -128,13 +117,16 @@ const qs9 = function (nodes) {
 
 const t1 = function (nodes) {
     nodes.forEach(x => {
-        let s = x.innerHTML.trim();
-        if (x.nextElementSibling && !x.nextElementSibling.lastElementChild.innerHTML.includes('￥')) {
-            let rmb = getRmb(s);
+        let s = x.innerHTML.trim().replace('$', '').replace('&nbsp;', '').replace(',', '');
+        //console.log(s)
+        if (x.nextElementSibling && x.nextElementSibling.lastElementChild && x.nextElementSibling.lastElementChild.innerHTML && !x.nextElementSibling.lastElementChild.innerHTML.includes('￥')) {
+            let rmb = (parseFloat(s) / rate).toFixed(2);
+           
             let b = document.createElement('sub');
             b.style.color = "green";
             b.innerHTML = '￥' + rmb;
             x.nextElementSibling.appendChild(b);
+            
         }
     })
 }
@@ -239,29 +231,6 @@ const S7 = function () {
                 b.innerHTML = rmb;
                 a.appendChild(b);
             }
-
-        }
-    }
-}
-
-const S2 = function (node_all) {
-    //console.log('BBB');
-    //let node_all = document.querySelectorAll('span[class="a-price-whole"]');
-    let rg1 = /\,/g;
-    for (const a of node_all) {
-        if (!(a.parentElement.lastElementChild.tagName == 'SUB')) {
-           // console.log('======开始=====')
-            let s1 = parseInt(a.firstChild.data.replace(rg1, ''));
-            let s2 = parseFloat('.' + a.nextElementSibling.innerText)
-            let s12 = s1 + s2;
-           // console.log('英磅为:'+s12);
-          //  console.log('汇率为:'+rate);
-            let rmb = (s12 / rate).toFixed(2);
-            let b = document.createElement('sub');
-            b.style.color = "green";
-            b.innerHTML = ' ￥' + rmb;
-            a.parentElement.appendChild(b);
-           // console.log('=======结束=======')
 
         }
     }

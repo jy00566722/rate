@@ -180,10 +180,12 @@ chrome.runtime.onInstalled.addListener(function(e){
     let shopee_tag = true
     let amazon_tag = true
     let aliexpress_tag = true
+    let info_tag = true //是否显示拖动提示
     chrome.storage.local.set({lazada_tag},function(){console.log('lazada_tag设置成功')})
     chrome.storage.local.set({shopee_tag},function(){console.log('shopee_tag设置成功')})
     chrome.storage.local.set({amazon_tag},function(){console.log('amazon_tag设置成功')})
     chrome.storage.local.set({aliexpress_tag},function(){console.log('aliexpress_tag设置成功')})
+    chrome.storage.local.set({info_tag},function(){console.log('info_tag设置成功')})
 
 })
 

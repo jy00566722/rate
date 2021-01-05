@@ -45,7 +45,8 @@ let S = new Set();
 let node_all =[
     ['span','a-size-'],
     ['span','a-color-'],
-    ['span','p13n-sc-price']
+    ['span','p13n-sc-price'],
+    ['span','gb-font-size-medium inlineBlock unitLineHeight dealPriceText']
 ];
 //总回调
 const all=function(){
