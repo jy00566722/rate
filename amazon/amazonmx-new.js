@@ -34,8 +34,10 @@ let S = new Set();
 let node_all = [
     ['span', 'a-size-'],
     ['span', 'a-color-'],
-    ['span', 'p13n-sc-price']
-];
+    ['span', 'p13n-sc-price'],
+    ['span','sc-EHOje eIzziE'],
+    ['span','gb-font-size-medium inlineBlock unitLineHeight dealPriceText']
+]
 //总回调
 const all = function () {
     console.log('总回调启动');
@@ -55,8 +57,9 @@ const all = function () {
     })
 }
 //$2,234.27 
-let rg2 = /^R\$\d{1,}\,\d{1,}( - R\$\d{1,}\,\d{1,2}){0,1}$/
-let rg1 = /^\$(\d+\,){0,}\d{1,}\.\d{0,}$/
+//$362.70 - $1,210.00
+let rg12 = /^\$(\d+\,){0,}\d{1,}\.\d{0,}$/
+let rg1 = /^\$(\d+\,){0,}\d{1,}\.\d{0,}( - \$(\d+\,){0,}\d{1,}\.\d{0,}){0,1}$/
 
 //从Set中取出元素，然后替换html
 const foo = function (s) {
@@ -130,108 +133,7 @@ const t1 = function (nodes) {
         }
     })
 }
-const S13 = function () {
-    let node_all = document.querySelectorAll('span[class="price price--jumbo"]');
-    for (const a of node_all) {
-        if (a.childElementCount == 4) {
-            let s = parseFloat(a.children[1].innerHTML.replace(/\,/g, '')) + parseFloat('.' + a.children[3].innerHTML);
-            let rmb = (s / rate).toFixed(2);
-            let c = document.createElement('sub');
-            c.style.color = "green";
-            c.innerHTML = '￥' + rmb;
-            a.appendChild(c);
 
-        }
-    }
-}
-const S12a = function () {
-    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__price__-bRnk"]');
-    for (const a of node_all) {
-        if (!(a.lastElementChild.tagName == 'SUB')) {
-            if (a.childElementCount == 1) {
-                let b = a.children[0];
-                let s = parseFloat(b.children[1].innerHTML.replace(/\,/g, '')) + parseFloat('.' + b.children[3].innerHTML);
-                let rmb = (s / rate).toFixed(2);
-                let c = document.createElement('sub');
-                c.style.color = "green";
-                c.innerHTML = '￥' + rmb;
-                a.appendChild(c);
-            } else if (a.childElementCount == 2) {
-                let b = a.children[0];
-                let s = parseFloat(b.children[1].innerHTML.replace(/\,/g, '')) + parseFloat('.' + b.children[3].innerHTML);
-                let rmb = (s / rate).toFixed(2);
 
-                let b1 = a.children[1];
-                let s1 = parseFloat(b1.children[2].innerHTML.replace(/\,/g, '')) + parseFloat('.' + b1.children[4].innerHTML);
-                let rmb1 = (s1 / rate).toFixed(2);
-                let c = document.createElement('sub');
-                c.style.color = "green";
-                c.innerHTML = '￥' + rmb + ' - ￥' + rmb1;
-                a.appendChild(c);
-            }
-        }
-    }
-}
-const S12 = function () {
-    let node_all = document.querySelectorAll('span[class="price style__xlarge__1mW1P style__buyPrice__61xrU style__bold__3MCG6"]');
-    for (const a of node_all) {
-        if (!(a.lastElementChild.tagName == 'SUB')) {
-            if (a.childElementCount == 1) {
-                let b = a.children[0];
-                let s = parseFloat(b.children[1].innerHTML.replace(/\,/g, '')) + parseFloat('.' + b.children[3].innerHTML);
-                let rmb = (s / rate).toFixed(2);
-                let c = document.createElement('sub');
-                c.style.color = "green";
-                c.innerHTML = '￥' + rmb;
-                a.appendChild(c);
-            } else if (a.childElementCount == 2) {
-                let b = a.children[0];
-                let s = parseFloat(b.children[1].innerHTML.replace(/\,/g, '')) + parseFloat('.' + b.children[3].innerHTML);
-                let rmb = (s / rate).toFixed(2);
 
-                let b1 = a.children[1];
-                let s1 = parseFloat(b1.children[2].innerHTML.replace(/\,/g, '')) + parseFloat('.' + b1.children[4].innerHTML);
-                let rmb1 = (s1 / rate).toFixed(2);
-                let c = document.createElement('sub');
-                c.style.color = "green";
-                c.innerHTML = '￥' + rmb + ' - ￥' + rmb1;
-                a.appendChild(c);
-            }
-        }
-    }
-}
 
-const S7 = function () {
-    let node_all = document.querySelectorAll('span[class="sx-price sx-price-large"]');
-    let rg1 = /\,/g;
-    for (const a of node_all) {
-        if (!(a.lastElementChild.style.color == 'green')) {
-            if (a.childElementCount == 7) {
-                let s1 = a.children[1].innerText;
-                let s2 = a.children[2].innerText;
-                let s3 = a.children[5].innerText;
-                let s4 = a.children[6].innerText;
-                let s = parseFloat(s1.replace(rg1, '')) + parseFloat('.' + s2);
-                let ss = parseFloat(s3.replace(rg1, '')) + parseFloat('.' + 4);
-                let s_ = (s / rate).toFixed(2);
-                let _s = (ss / rate).toFixed(2);
-                let rmb = `￥${s_} - ￥${_s}`;
-                let b = document.createElement('sub');
-                b.style.color = "green";
-                b.innerHTML = rmb;
-                a.appendChild(b);
-            } else if (a.childElementCount == 3) {
-                let s1 = a.children[1].innerText;
-                let s2 = a.children[2].innerText;
-                let s = parseFloat(s1.replace(rg1, '')) + parseFloat('.' + s2);
-                let s_ = (s / rate).toFixed(2);
-                let rmb = `￥${s_}`;
-                let b = document.createElement('sub');
-                b.style.color = "green";
-                b.innerHTML = rmb;
-                a.appendChild(b);
-            }
-
-        }
-    }
-}

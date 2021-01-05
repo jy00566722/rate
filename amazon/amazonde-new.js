@@ -143,15 +143,20 @@ function isNumber(val){
 //<span class="a-offscreen">30,99&nbsp;€</span>                   | 1.709,98&nbsp;€   |€&nbsp;13,37 |30,99&nbsp;€
 const t1=function(nodes){
     nodes.forEach(x=>{
-        let s = x.innerHTML.trim().replace('€','').replace('&nbsp;','').replace('.','').replace(',','.');;
+        let s = x.innerHTML.trim().replace('€','').replace('&nbsp;','').replace('.','').replace(',','.');
+        console.log('金额:',s)
         if(x.nextElementSibling&&x.nextElementSibling.lastElementChild&&x.nextElementSibling.lastElementChild.innerHTML&&!x.nextElementSibling.lastElementChild.innerHTML.includes('￥')){
-        let rmb = (parseFloat(s)/rate).toFixed(2);
-        if(isNumber(rmb)){
-        let b = document.createElement('sub');
-            b.style.color = "green";
-            b.innerHTML = '￥'+rmb;
-            x.nextElementSibling.appendChild(b);
-        }
+            let rmb = (parseFloat(s)/rate).toFixed(2);
+            if(1/* isNumber(rmb) */){
+            let b = document.createElement('sub');
+                b.style.color = "green";
+                b.innerHTML = '￥'+rmb;
+                x.nextElementSibling.appendChild(b);
+            }else{
+               // console.log('no_go1:',rmb)
+            }
+        }else{
+            //console.log('no_go:',x)
         }
     })
 }
