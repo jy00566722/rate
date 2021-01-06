@@ -55,7 +55,7 @@ let google_2 = [{"name":"美元","abbreviation":"USD","symbol":"$","flagURL":"as
 async function get_rate() {
   console.log("执行获取汇率:");
   //const u = await getU();
-  let url = `https://rate.lizudi.top/custom-interface/call/Get_rate_redis?a=chromeA&v=2.7.0.0&u=10000`;
+  let url = `https://rate.lizudi.top/custom-interface/call/Get_rate_redis`;
   axios.get(url).then(function (result) {
     //console.log("从汇率接口返回的数据为:");
     //console.log(result.data);
@@ -137,38 +137,7 @@ function sendMessageToContentScript(message, callback) {
     });
   });
 }
-/* //生成唯一id
-function getRandomToken() {
-  var randomPool = new Uint8Array(32);
-  crypto.getRandomValues(randomPool);
-  var hex = '';
-  for (var i = 0; i < randomPool.length; ++i) {
-      hex += randomPool[i].toString(16);
-  }
-  return hex;
-}
-//获取userid
-function getU(){
-  return new Promise(function(resolve,reject){
-    chrome.storage.sync.get('userid', function(items) {
-      var userid = items.userid;
-      if (userid) {
-          resolve(userid);
-      } else {
-          userid = getRandomToken();
-          chrome.storage.sync.set({userid: userid}, function() {
-              resolve(userid);
-          });
-      }
-    });
-  })
-} */
 
-/*   chrome.storage.onChanged.addListener(function(obj,areaName){
-  console.log('storage改变:')
-  console.log(obj)
-  
-})  */ 
 chrome.runtime.onInstalled.addListener(function(e){
      //初始化货币国家
     let countries = ['CNY','USD','PHP','TWD','MYR','VND']
