@@ -87,7 +87,10 @@ let node_all = [
     ['span','_3g0idS _1OFcS5'],//iphone搜索页
     ['div','_2aoS3Y'],  //台湾首页团团转
     ['span','r3xOg7'] , //2019-12-25加
-    ['span','_3HwhOc _341bF0']
+    ['span','_3HwhOc _341bF0'],
+    ['span','djJP_7'], //2021-1-15
+    ['span','_1xk7ak'], //2021-1-15
+    ['span','_3zyVWg'] //2021-1-15
 ];
 
 const Gw = function(){
