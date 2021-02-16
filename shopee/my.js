@@ -28,7 +28,6 @@ let rate = 0;//当前国家的汇率
 //====统一监听body的改变，触发总回调
 let callback = function (records){
     //console.log('回调启动...');
-
     chrome.storage.local.get(['shopee_tag'],function(s){
         const {shopee_tag} = s
         if(shopee_tag){
@@ -36,10 +35,7 @@ let callback = function (records){
         }else{
             console.log('shopee开关关闭')
         }
-
     })
-
-    
 };
 let throttle_callback = _.throttle(callback,3000);
 
@@ -65,8 +61,9 @@ const all=function(){
          //console.log(rate);
         //判断元素有无，及生成处理函数
         Sa9(node_all);
-        //推荐页特别处理，单价在文本节点中
+        //推荐页特别处理，单价在文本节点中 从首页中大类图标点进来的页面
         if(document.querySelectorAll('div[class="collection-card__price"]')[0]){
+           //console.log('特别页处理')
             Gw();
         }
     })
@@ -90,7 +87,9 @@ let node_all = [
     ['span','_3HwhOc _341bF0'],
     ['span','djJP_7'], //2021-1-15
     ['span','_1xk7ak'], //2021-1-15
-    ['span','_3zyVWg'] //2021-1-15
+    ['span','_3zyVWg'], //2021-1-15
+    ['div','AJyN7v'], //2021-2-16 详情页主价
+    ['span','-pMUYd'] //2021-2-16 推荐页 topshop
 ];
 
 const Gw = function(){
@@ -106,7 +105,9 @@ const Gw = function(){
             let rmb = (s/rate).toFixed(2);
             //i.nextSibling.data = i.nextSibling.data+ `<sub style="color:green"> ￥${rmb}</sub>`;
             let me = document.createElement('sub');
-                me.style.color = "green";
+                me.style.color = "green"; //overflow-x: hidden
+                me.style.overflow = '',
+                me.setAttribute("style","color:#18B4A3;overflow-x: visible");
                 me.innerHTML = ` ￥${rmb}`;
                 me.title = `￥${rmb}`;
                 i.parentNode.appendChild(me);
@@ -137,7 +138,7 @@ const qs9=function(node,classname){
             continue;
         }
         let rmb = priceRmb(s);
-        a[i].innerHTML=s + `<sub style="color:green" title="￥${rmb}"> ￥${rmb}</sub>`;
+        a[i].innerHTML=s + `<sub style="color:green;" title="￥${rmb}"> ￥${rmb}</sub>`; //#18B4A3-青绿  #A71BB1-紫
     }
 }
 
