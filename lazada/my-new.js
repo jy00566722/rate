@@ -89,7 +89,6 @@ const  getRmb = function(s){
     let b = parseFloat(a);
     let rmb  = (b/rate).toFixed(2);
     return rmb;
-    
 }
 
 //总回调

@@ -142,7 +142,6 @@ const qs9=function(nodes){
             //console.log(b);
         }
     })
-   
 }
 
 const t1=function(nodes){

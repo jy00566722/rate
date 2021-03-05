@@ -1,6 +1,6 @@
 {
     "name":"汇率转换",
-    "version":"2.8.2.0",
+    "version":"2.8.3.0",
     "manifest_version":2,
     "description":"此插件为跨境卖家设计，用于显示跨境平台站点前台页面上商品价格对应的人民币价格。同时也提供手动输入数字转换货币的功能，可以互转货币的货币种类共有164个",
     "icons":{
@@ -20,32 +20,32 @@
     "content_scripts":[
         {
             "matches":["https://*.lazada.com.my/*"],
-            "js":["js/Underscore.js","lazada/my-new.js"],
+            "js":["js/Underscore.js","lazada/lazada_all.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.lazada.com.ph/*"],
-            "js":["js/Underscore.js","lazada/ph-new.js"],
+            "js":["js/Underscore.js","lazada/lazada_all.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.lazada.sg/*"],
-            "js":["js/Underscore.js","lazada/sg-new.js"],
+            "js":["js/Underscore.js","lazada/lazada_all.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.lazada.co.id/*"],
-            "js":["js/Underscore.js","lazada/id-new.js"],
+            "js":["js/Underscore.js","lazada/lazada_all.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.lazada.vn/*"],
-            "js":["js/Underscore.js","lazada/vn-new.js"],
+            "js":["js/Underscore.js","lazada/lazada_all.js"],
             "run_at": "document_end"
         },
         {
             "matches":["https://*.lazada.co.th/*"],
-            "js":["js/Underscore.js","lazada/th-new.js"],
+            "js":["js/Underscore.js","lazada/lazada_all.js"],
             "run_at": "document_end"
         },
         {
