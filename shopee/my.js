@@ -53,14 +53,26 @@ try{
     console.log('监听器启动失败body."');
 }
 
-const all=function(){
+function get_shopee_nodes(){
+    return new Promise((resolve, reject)=>{
+        chrome.storage.local.get(['shopee_nodes'],result=>{
+            resolve(result.shopee_nodes)
+        })
+    })
+}
+let shopee_nodes = []
+const all= async function(){
     //console.log('总回调启动...');
-    chrome.storage.local.get(["my_rate"],function(result){
+    chrome.storage.local.get(["my_rate"],async function(result){
         // rate = result.my_rate.rate_MYR;
          rate = result.my_rate[`rate_${country}`];
          //console.log(rate);
         //判断元素有无，及生成处理函数
-        Sa9(node_all);
+        if(shopee_nodes.length===0){
+            shopee_nodes = await get_shopee_nodes()
+        }
+        const new_nodes = [...node_all,...shopee_nodes]
+        Sa9(new_nodes);
         //推荐页特别处理，单价在文本节点中 从首页中大类图标点进来的页面
         if(document.querySelectorAll('div[class="collection-card__price"]')[0]){
            //console.log('特别页处理')
@@ -72,7 +84,7 @@ const all=function(){
 //定义要监听的价格元素
 let node_all = [
     ['span','item-price-number'], //首页秒杀 元素,calss name
-    ['div','tyA3vN _3eZ5Vz _3RuPcU'],  
+/*     ['div','tyA3vN _3eZ5Vz _3RuPcU'],  
     ['div','_3n5NQx'],//详情页主价
     ['div','item-card-special__current-price item-card-special__current-price--special'],//详情页边上的价
     ['div','shopee-item-card__current-price shopee-item-card__current-price--free-shipping'],//详情页下面的价
@@ -89,7 +101,7 @@ let node_all = [
     ['span','_1xk7ak'], //2021-1-15
     ['span','_3zyVWg'], //2021-1-15
     ['div','AJyN7v'], //2021-2-16 详情页主价
-    ['span','-pMUYd'] //2021-2-16 推荐页 topshop
+    ['span','-pMUYd'] //2021-2-16 推荐页 topshop */
 ];
 
 const Gw = function(){

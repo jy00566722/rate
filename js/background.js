@@ -141,7 +141,7 @@ function sendMessageToContentScript(message, callback) {
 chrome.runtime.onInstalled.addListener(function(e){
      //初始化货币国家
     let countries = ['CNY','USD','PHP','TWD','MYR','VND']
-     chrome.storage.local.set({ "my_rate_zz_countries": countries }, function (s) {  
+      chrome.storage.local.set({ "my_rate_zz_countries": countries }, function (s) {  
       console.log("初始化::货币列表在my_rate_zz_countries中...");
     }); 
     //初始化各站点标记
@@ -150,19 +150,34 @@ chrome.runtime.onInstalled.addListener(function(e){
     let amazon_tag = true
     let aliexpress_tag = true
     let info_tag = true //是否显示拖动提示
+    let shopee_nodes = [] //shopee在线节点
     chrome.storage.local.set({lazada_tag},function(){console.log('lazada_tag设置成功')})
     chrome.storage.local.set({shopee_tag},function(){console.log('shopee_tag设置成功')})
     chrome.storage.local.set({amazon_tag},function(){console.log('amazon_tag设置成功')})
     chrome.storage.local.set({aliexpress_tag},function(){console.log('aliexpress_tag设置成功')})
     chrome.storage.local.set({info_tag},function(){console.log('info_tag设置成功')})
-
+    chrome.storage.local.set({shopee_nodes},function(){console.log('shopee_nodes设置成功')})
 })
+
+async function get_shopee_nodes(){
+  let url = 'https://rate.lizudi.top/v1/shopee_nodes'
+  axios.get(url).then(data=>{
+    if(data.status===200 && data.data&& data.data.code === 20000){
+      chrome.storage.local.set({'shopee_nodes':data.data.nodes},function(){console.log('在线获取shopee_nodes并设置设置成功..')})
+    }
+  }).catch(e=>{
+    console.log('获取shopee_nodes发生错误:',e)
+  })
+}
+
 
 
 get_rate();//初始化汇率
 init_CNY();//初始化人民币中间值
+get_shopee_nodes()
 //定时获取汇率，更新--每小时获取一次
 let se = setInterval(get_rate, 300000);
+let sa = setInterval(get_shopee_nodes, 290000);
 
 
 
