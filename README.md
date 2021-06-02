@@ -27,7 +27,7 @@ Lazada
 Shopee    
 Amazon   
 Aliexpress 
-Wish
+Wish(暂停支持)
 
 
 
