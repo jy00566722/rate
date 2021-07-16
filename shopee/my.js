@@ -21,6 +21,10 @@ if(URL.includes('.my/') || URL.includes('my.xiapibuy.com')){
     country = 'VND';
 }else if(URL.includes('xiapi.xiapibuy.com')|| URL.includes('xiapi.xiapibuy.cc')){
     country = 'TWD';
+}else if(URL.includes('br.xiapibuy.com') || URL.includes('shopee.com.br')){
+    country = 'BRL'
+}else if(URL.includes('mx.xiapibuy.com') || URL.includes('shopee.com.mx')){
+    country = 'MXN'
 }
 
 console.log(country);
@@ -156,14 +160,25 @@ const qs9=function(node,classname){
 
 //计算人民币
 const  priceRmb = function(s){
-    let r1 = /^[^0-9]*/i;
-    let r2= /,/g;
-    let a = s.trim().replace(r1,'').replace(r2,'');
-    if(country==='VND' || country ==='IDR'){
-        a = a.replace(/\./g,'');
+    if(country === 'BRL'){
+        let r1 = /^[^0-9]*/i;
+        let r2= /,/g;
+        let r3 = /\./g
+        let s1 = s.replace(r1,'')
+        let s2 = s1.replace(r3,'')
+        let s3 = s2.replace(r2,'.')
+        let b = parseFloat(s3)
+        let rmb = (b/rate).toFixed(1)
+        return rmb
+    }else{
+        let r1 = /^[^0-9]*/i;
+        let r2= /,/g;
+        let a = s.trim().replace(r1,'').replace(r2,'');
+        if(country==='VND' || country ==='IDR'){
+            a = a.replace(/\./g,'');
+        }
+        let b = parseFloat(a);
+        let rmb  = (b/rate).toFixed(1);
+        return rmb;
     }
-    let b = parseFloat(a);
-    let rmb  = (b/rate).toFixed(2);
-    return rmb;
-    
 }
