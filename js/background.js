@@ -139,6 +139,16 @@ function sendMessageToContentScript(message, callback) {
 }
 
 chrome.runtime.onInstalled.addListener(function(e){
+  console.log(e)
+  if(e.reason === 'install'){
+    console.log('插件安装')
+  }
+  if(e.reason === 'update'){
+    console.log('插件更新')
+  }
+  if(e.reason === 'chrome_update'){
+    console.log('chrome更新')
+  }
      //初始化货币国家
     let countries = ['CNY','USD','PHP','TWD','MYR','VND']
       chrome.storage.local.set({ "my_rate_zz_countries": countries }, function (s) {  

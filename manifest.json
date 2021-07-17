@@ -11,7 +11,7 @@
     "incognito":"spanning",
     "permissions":[
         "storage",
-        "https://rate.lizudi.top/"  
+        "https://rate.lizudi.top/"       
     ],
     "background":{
         "scripts":["js/axios.min.js","js/background.js"]
@@ -67,7 +67,11 @@
                     "https://*.shopee.com.br/*",
                     "https://*.br.xiapibuy.com/*",
                     "https://*.shopee.com.mx/*",
-                    "https://*.mx.xiapibuy.com/*"
+                    "https://*.mx.xiapibuy.com/*",
+                    "https://*.shopee.com.co/*",
+                    "https://*.co.xiapibuy.com/*",
+                    "https://*.shopee.cl/*",
+                    "https://*.cl.xiapibuy.com/*"
                     ],
             "js":["js/Underscore.js","shopee/my.js"],
             "run_at": "document_end"

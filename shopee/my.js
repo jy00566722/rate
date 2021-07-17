@@ -22,9 +22,13 @@ if(URL.includes('.my/') || URL.includes('my.xiapibuy.com')){
 }else if(URL.includes('xiapi.xiapibuy.com')|| URL.includes('xiapi.xiapibuy.cc')){
     country = 'TWD';
 }else if(URL.includes('br.xiapibuy.com') || URL.includes('shopee.com.br')){
-    country = 'BRL'
+    country = 'BRL' //巴西
 }else if(URL.includes('mx.xiapibuy.com') || URL.includes('shopee.com.mx')){
-    country = 'MXN'
+    country = 'MXN' //墨西哥
+}else if(URL.includes('co.xiapibuy.com') || URL.includes('shopee.com.co')){
+    country = 'COP' //哥伦比亚
+}else if(URL.includes('cl.xiapibuy.com') || URL.includes('shopee.cl')){
+    country = 'CLP' //智利
 }
 
 console.log(country);
@@ -88,24 +92,6 @@ const all= async function(){
 //定义要监听的价格元素
 let node_all = [
     ['span','item-price-number'], //首页秒杀 元素,calss name
-/*     ['div','tyA3vN _3eZ5Vz _3RuPcU'],  
-    ['div','_3n5NQx'],//详情页主价
-    ['div','item-card-special__current-price item-card-special__current-price--special'],//详情页边上的价
-    ['div','shopee-item-card__current-price shopee-item-card__current-price--free-shipping'],//详情页下面的价
-    ['div','shopee-item-card__current-price'],//详情页下面的价
-    ['div','_3r_Ddr'],
-    ['span','_341bF0'],
-    ['span','SlvYAy'],
-    ['div','item-card-special__current-price item-card-special__current-price--special item-card-special__current-price--ofs'],
-    ['span','_3g0idS _1OFcS5'],//iphone搜索页
-    ['div','_2aoS3Y'],  //台湾首页团团转
-    ['span','r3xOg7'] , //2019-12-25加
-    ['span','_3HwhOc _341bF0'],
-    ['span','djJP_7'], //2021-1-15
-    ['span','_1xk7ak'], //2021-1-15
-    ['span','_3zyVWg'], //2021-1-15
-    ['div','AJyN7v'], //2021-2-16 详情页主价
-    ['span','-pMUYd'] //2021-2-16 推荐页 topshop */
 ];
 
 const Gw = function(){
@@ -160,7 +146,16 @@ const qs9=function(node,classname){
 
 //计算人民币
 const  priceRmb = function(s){
-    if(country === 'BRL'){
+    if(country === 'CLP'|| country === 'COP'){
+        let r1 = /^[^0-9]*/i;
+        let r2= /,/g;
+        let r3 = /\./g
+        let s1 = s.replace(r1,'')
+        let s2 = s1.replace(r3,'')
+        let b = parseFloat(s2)
+        let rmb = (b/rate).toFixed(1)
+        return rmb
+    }else if(country === 'BRL'){
         let r1 = /^[^0-9]*/i;
         let r2= /,/g;
         let r3 = /\./g
