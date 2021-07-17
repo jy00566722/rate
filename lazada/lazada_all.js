@@ -20,14 +20,20 @@ if(URL.includes('com.my/') ){
 }
 console.log('确定的国家为:'+country)
 //总回调
-const all = function(){
-    console.log('总回调启动..')
+
+let lazada_nodes = []
+const all = async function(){
+    //console.log('总回调启动..')
     chrome.storage.local.get(['lazada_tag'],function(s){
         const {lazada_tag} = s
         if(lazada_tag){
-            chrome.storage.local.get(["my_rate"],function(result){
+            chrome.storage.local.get(["my_rate"],async function(result){
                 rate = result.my_rate[`rate_${country}`]; //按国家获取汇率
-                Sa9(node_all);
+                if(lazada_nodes.length === 0){
+                    lazada_nodes = await get_lazada_nodes()
+                }
+                const new_nodes = [...node_all,...lazada_nodes]
+                Sa9(new_nodes);
                 //特别处理详情页价格
                 DoMainPrice()
             })
@@ -55,6 +61,14 @@ try{
     console.log('监听器启动失败body."');
 }
 
+function get_lazada_nodes(){
+    return new Promise((resolve, reject)=>{
+        chrome.storage.local.get(['lazada_nodes'],result=>{
+            resolve(result.lazada_nodes)
+        })
+    })
+}
+
 //单独为详情页设置主价格改变的回调
 let option1 = {
     'childList': true,
@@ -80,28 +94,7 @@ try{
     //console.log(e)
 }
 
-let node_all=[
-    ['span','price'],
-    ['span','super-deals-item-sale-price-value'],
-    ['span','global-brand-item-price-value'],
-    ['span','best-seller-item-price-value'],
-    ['div','sale-price'],
-    ['div','store-product-price'],
-   // ['span',' pdp-price pdp-price_type_normal pdp-price_color_orange pdp-price_size_xl'], 详情上主价格要特别处理
-    ['p','product-price'],
-    ['div','product-price'],
-    ['span','c13VH6'],
-    ['span','pswt-product-price'],
-    ['div','pswt-product-price'],
-    ['div','item-discount-price'],
-    ['div','delivery-option-item__shipping-fee'],
-    ['div','discount-price'],
-    ['span','price-label price-label-prim'],  //详情页中的多买送促销信息
-    ['div','p-slider-product-price'],
-    ['span','hotdeal-product3-item-price-discount'],//lazglobal页面
-    ['span','text'],
-    ['div','voucher-tile-discount-value-text']
-];
+let node_all=[];
 
 
 //取出元素数组的元素处理

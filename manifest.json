@@ -1,6 +1,6 @@
 {
     "name":"汇率转换",
-    "version":"2.8.5.0",
+    "version":"2.8.6.0",
     "manifest_version":2,
     "description":"此插件为跨境卖家设计，用于显示跨境平台站点前台页面上商品价格对应的人民币价格。同时也提供手动输入数字转换货币的功能，可以互转货币的货币种类共有164个",
     "icons":{
@@ -77,40 +77,22 @@
             "run_at": "document_end"
         },
         {
-            "matches":["https://*.amazon.com/*"],
-            "js":["js/Underscore.js","amazon/amazon-new.js"],
+            "matches":["https://*.amazon.com/*",
+                        "https://*.amazon.co.jp/*",
+                        "https://*.amazon.co.uk/*",
+                        "https://*.amazon.de/*",
+                        "https://*.amazon.com.br/*",
+                        "https://*.amazon.com.mx/*",
+                        "https://*.amazon.com.au/*",
+                        "https://*.amazon.fr/*",
+                        "https://*.amazon.ca/*",
+                        "https://*.amazon.es/*",
+                        "https://*.amazon.it/*"
+            ],
+            "js":["js/Underscore.js","amazon/amazon-all.js"],
             "run_at": "document_end"
         },
-        {
-            "matches":["https://*.amazon.co.jp/*"],
-            "js":["js/Underscore.js","amazon/amazonjp-new.js"],
-            "run_at": "document_end"
-        },
-        {
-            "matches":["https://*.amazon.co.uk/*"],
-            "js":["js/Underscore.js","amazon/amazonuk-new.js"],
-            "run_at": "document_end"
-        },
-        {
-            "matches":["https://*.amazon.de/*"],
-            "js":["js/Underscore.js","amazon/amazonde-new.js"],
-            "run_at": "document_end"
-        },
-        {
-            "matches":["https://*.amazon.com.br/*"],
-            "js":["js/Underscore.js","amazon/amazonbr-new.js"],
-            "run_at": "document_end"
-        },
-        {
-            "matches":["https://*.amazon.com.mx/*"],
-            "js":["js/Underscore.js","amazon/amazonmx-new.js"],
-            "run_at": "document_end"
-        },
-        {
-            "matches":["https://*.amazon.com.au/*"],
-            "js":["js/Underscore.js","amazon/amazonau-new.js"],
-            "run_at": "document_end"
-        },
+
         {
             "matches":["https://*.aliexpress.com/*"],
             "js":["js/Underscore.js","aliexpress/USA.js"],
