@@ -1,0 +1,94 @@
+{
+    "name":"汇率转换",
+    "version":"2.9.1.2",
+    "manifest_version":2,
+    "description":"此插件为跨境卖家设计，用于显示跨境平台站点前台页面上商品价格对应的人民币价格。同时也提供手动输入数字转换货币的功能，可以互转货币的货币种类共有164个",
+    "icons":{
+        "16":"image/16.png",
+        "48":"image/48.png",
+        "128":"image/128.png"
+    },
+    "incognito":"spanning",
+    "permissions":[
+        "storage",
+        "https://rate.lizudi.top/"
+    ],
+    "background":{
+        "scripts":["jss/axios.min.js","jss/background.js"]
+    },
+    "web_accessible_resources": ["jss/inject.js"],
+    "content_scripts":[
+        {
+            "matches":["https://*.lazada.com.my/*",
+                "https://*.lazada.com.ph/*",
+                "https://*.lazada.sg/*",
+                "https://*.lazada.co.id/*",
+                "https://*.lazada.vn/*",
+                "https://*.lazada.co.th/*"
+            ],
+            "js":["jss/Underscore.js","lazada/lazada_all.js"],
+            "run_at": "document_end"
+        },
+
+        {
+            "matches":["https://*.xiapi.xiapibuy.cc/*",
+                    "https://*.xiapi.xiapibuy.com/*",
+                    "https://*.shopee.com.my/*",
+                    "https://*.shopee.ph/*",
+                    "https://*.shopee.sg/*",
+                    "https://*.shopee.co.id/*",
+                    "https://*.shopee.tw/*",
+                    "https://*.shopee.co.th/*",
+                    "https://*.shopee.vn/*",
+                    "https://*.th.xiapibuy.com/*",
+                    "https://*.vn.xiapibuy.com/*",
+                    "https://*.ph.xiapibuy.com/*",
+                    "https://*.my.xiapibuy.com/*",
+                    "https://*.id.xiapibuy.com/*",
+                    "https://*.sg.xiapibuy.com/*",
+                    "https://*.shopee.com.br/*",
+                    "https://*.br.xiapibuy.com/*",
+                    "https://*.shopee.com.mx/*",
+                    "https://*.mx.xiapibuy.com/*",
+                    "https://*.shopee.com.co/*",
+                    "https://*.co.xiapibuy.com/*",
+                    "https://*.shopee.cl/*",
+                    "https://*.cl.xiapibuy.com/*"
+                    ],
+            "js":["jss/Underscore.js","shopee/my.js"],
+            "run_at": "document_end"
+        },
+        {
+            "matches":["https://*.amazon.com/*",
+                        "https://*.amazon.co.jp/*",
+                        "https://*.amazon.co.uk/*",
+                        "https://*.amazon.de/*",
+                        "https://*.amazon.com.br/*",
+                        "https://*.amazon.com.mx/*",
+                        "https://*.amazon.com.au/*",
+                        "https://*.amazon.fr/*",
+                        "https://*.amazon.ca/*",
+                        "https://*.amazon.es/*",
+                        "https://*.amazon.it/*"
+            ],
+            "js":["jss/Underscore.js","amazon/amazon-all.js"],
+            "run_at": "document_end"
+        },
+
+        {
+            "matches":["https://*.aliexpress.com/*",
+                        "https://*.aliexpress.ru/*"
+            ],
+            "js":["jss/Underscore.js","aliexpress/girl.js"],
+            "run_at": "document_end"
+        }
+    ],
+    "browser_action":{
+        "default_icon":"image/128.png",
+        "default_title":"汇率转换",
+        "default_popup":"index.html"
+    },
+    "content_security_policy": "script-src 'self'; object-src 'self'",
+    "options_page":"options.html"
+    
+}

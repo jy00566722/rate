@@ -1,0 +1,14 @@
+{
+  "name": "rate",
+  "version": "1.0.0",
+  "description": "\\",
+  "main": "content.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pengfeng",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^5.10.0"
+  }
+}

@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+          <link rel="stylesheet" href="csss/element.css" />
+          <script src="jss/vue3.2.2.js"></script>
+          <script src="jss/element.js"></script>
+    <title>this is me</title>
+  </head>
+  <body>
+    <div id="app">
+        <el-alert title="开启新功能" type="warning" center show-icon effect="dark" :closable="false"> </el-alert>
+        <el-button type="success" style="margin-top: 10px;">开启日本趣天站的价格转换(qoo10.jp)</el-button>
+  
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            message: "Hello Element Plus",
+          };
+        },
+        mounted(){
+            //setInterval(()=>{this.postMessageToParent()},5000) 
+
+    },
+        methods:{
+            postMessageToParent:(message)=>{
+                window.parent.postMessage({cmd:'go',data:'google'},'*')
+            },
+
+            forClickQoo10:()=>{
+                console.log('打开qoo10.jp')
+            }
+        }
+      };
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.mount("#app");
+    </script>
+  </body>
+</html>
